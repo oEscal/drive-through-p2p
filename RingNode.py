@@ -19,7 +19,6 @@ class RingNode(threading.Thread):
       self.successor_addr = self.addr
       self.nodes_com = []
 
-      self.keystore = {}
       self.socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
       self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
       self.socket.settimeout(timeout)
@@ -39,26 +38,6 @@ class RingNode(threading.Thread):
             return None, addr
          else:
             return p, addr
-
-   def put(self, key, value, address):
-      key_hash = dht_hash(key)
-      self.logger.debug('Put: %s %s', key, key_hash)
-      if contains_successor(self.id, self.successor_id, key_hash):
-         self.keystore[key] = value
-         self.send(address, {'method': 'ACK'})
-      else:
-         # send to DHT
-         self.send(self.successor_addr, {'method': 'PUT', 'args': {'key': key, 'value': value, 'addr': address}})
-
-   def get(self, key, address):
-      key_hash = dht_hash(key)
-      self.logger.debug('Get: %s %s', key, key_hash)
-      if contains_successor(self.id, self.successor_id, key_hash):
-         value = self.keystore[key]
-         self.send(address, {'method': 'ACK', 'args': value})
-      else:
-         # send to DHT
-         self.send(self.successor_addr, {'method': 'GET', 'args': {'key': key, 'addr': address}})
 
    def requestJoin(self):
       message_to_send = {'method': 'NODE_JOIN', 'args': {'addr': self.addr, 'id': self.id}}
@@ -82,6 +61,7 @@ class RingNode(threading.Thread):
                if args['id'] not in self.nodes_com:
                   self.nodes_com.append(args['id'])
 
+               # depois olhar para este if que pode ser melhorado
                if args['id'] > self.successor_id < self.id and len(self.nodes_com) > self.id + 1:
                   self.inside_dht = False
                   self.successor_id = self.max_nodes*2
@@ -97,6 +77,7 @@ class RingNode(threading.Thread):
             if message_received['method'] == 'JOIN_REQ':
                self.node_join(message_received['args'])
 
+         # depois meter um refresh time dado pelo user e não fixo no if
          if not self.inside_dht or time.time() - delta_time > 2:
             self.requestJoin()
             delta_time = time.time()
