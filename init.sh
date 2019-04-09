@@ -6,4 +6,4 @@ alias k='killall xterm'
 xterm -hold -geometry 73x31+$((3000 - $screen))+100 -T "restaurant" -hold -e python3 restaurant.py &
 xterm -geometry 73x31+$((2500 - $screen))+700 -T "chef" -hold -e python3 chef.py &
 xterm -geometry 73x31+$((3000 - $screen))+700 -T "receptionist" -hold -e python3 receptionist.py &
-#xterm -geometry 73x31+$((3500 - $screen))+400 -T "clerk" -hold -e python3 clerk.py &
+xterm -geometry 73x31+$((3500 - $screen))+400 -T "clerk" -hold -e python3 clerk.py &

@@ -5,8 +5,6 @@ import socket
 import threading
 import logging
 import pickle
-from utils import dht_hash, contains_predecessor, contains_successor
-
 
 class RingNode(threading.Thread):
    def __init__(self, address, id, max_nodes=4, dht_address=None, timeout=3):
@@ -63,11 +61,12 @@ class RingNode(threading.Thread):
          self.send(self.successor_addr, {'method': 'GET', 'args': {'key': key, 'addr': address}})
 
    def requestJoin(self):
-      o = {'method': 'NODE_JOIN', 'args': {'addr': self.addr, 'id': self.id}}
+      message_to_send = {'method': 'NODE_JOIN', 'args': {'addr': self.addr, 'id': self.id}}
+
+      # multicast
       for i in range(254):
          address_send = ('127.0.0.' + str(i + 1), 5000)
-         #print(address_send)
-         self.send(address_send, o)
+         self.send(address_send, message_to_send)
 
    def run(self):
       self.socket.bind(self.addr)
@@ -77,7 +76,6 @@ class RingNode(threading.Thread):
          p, addr = self.recv()
          if p is not None:
             message_received = pickle.loads(p)
-            #self.logger.info('O: %s', message_received)
             if message_received['method'] == 'NODE_JOIN':
                args = message_received['args']
 
@@ -89,13 +87,9 @@ class RingNode(threading.Thread):
                   self.successor_id = self.max_nodes*2
                   self.successor_addr = self.addr
 
-               if self.successor_id > args['id'] > self.id:
-                  self.inside_dht = True
-                  self.successor_id = args['id']
-                  self.successor_addr = args['addr']
-
-               elif (len(self.nodes_com) > 1 and
-                       self.id == max(self.nodes_com) and args['id'] == min(self.nodes_com)):
+               if ((len(self.nodes_com) > 1 and
+                       self.id == max(self.nodes_com) and args['id'] == min(self.nodes_com)) or
+                       self.successor_id > args['id'] > self.id):
                   self.inside_dht = True
                   self.successor_id = args['id']
                   self.successor_addr = args['addr']
@@ -107,5 +101,4 @@ class RingNode(threading.Thread):
             self.requestJoin()
             delta_time = time.time()
 
-            print(str(self.addr))
-            print(str(self.successor_addr) + "\n")
+            self.logger.debug("Me: " + str(self.addr) + "\nSuccessor:" + str(self.successor_addr) + "\n")
