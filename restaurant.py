@@ -1,7 +1,7 @@
 import time
 import logging
 from RingNode import RingNode
-from utils import ENTITIES_NAMES
+from utils import ENTITIES_NAMES, RING_FORMED, NODE_DISCOVERY
 
 logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
@@ -32,7 +32,7 @@ def main():
    delta_time = time.time()
    while restaurant.inside_ring_order != restaurant.max_nodes:
       if restaurant.inside_ring and time.time() - delta_time > 2:
-         message_to_send = {'method': 'RING_FORMED', 'args': 0}
+         message_to_send = {'method': RING_FORMED, 'args': 0}
          restaurant.send(restaurant.successor_addr, message_to_send)
          delta_time = time.time()
 
@@ -40,7 +40,7 @@ def main():
    while discovery:
       if restaurant.allInRing():
          for i in restaurant.entities:
-            message_to_send = {'method': 'NODE_DISCOVERY', 'args': {'name': i, 'id': None}}
+            message_to_send = {'method': NODE_DISCOVERY, 'args': {'name': i, 'id': None}}
             restaurant.send(restaurant.successor_addr, message_to_send)
          discovery = False
 

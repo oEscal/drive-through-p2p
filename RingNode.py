@@ -5,7 +5,7 @@ import socket
 import threading
 import logging
 import pickle
-from utils import ENTITIES_NAMES
+from utils import NODE_JOIN, ENTITIES_NAMES, JOIN_REQ, RING_FORMED, NODE_DISCOVERY
 
 class RingNode(threading.Thread):
    def __init__(self, address, id, name, max_nodes=4, ring_address=None, timeout=3):
@@ -48,7 +48,7 @@ class RingNode(threading.Thread):
             return p, addr
 
    def requestJoin(self):
-      message_to_send = {'method': 'NODE_JOIN', 'args': {'addr': self.addr, 'id': self.id}}
+      message_to_send = {'method': NODE_JOIN, 'args': {'addr': self.addr, 'id': self.id}}
 
       # multicast
       for i in range(254):
@@ -56,7 +56,7 @@ class RingNode(threading.Thread):
          self.send(address_send, message_to_send)
 
    def discoveryReply(self, args):
-      message_to_send = {'method': 'NODE_DISCOVERY', 'args': args.copy()}
+      message_to_send = {'method': NODE_DISCOVERY, 'args': args.copy()}
 
       if self.name == args['name'] and args['id'] is None:
          message_to_send['args']['id'] = self.id
@@ -77,7 +77,7 @@ class RingNode(threading.Thread):
          p, addr = self.recv()
          if p is not None:
             message_received = pickle.loads(p)
-            if message_received['method'] == 'NODE_JOIN':
+            if message_received['method'] == NODE_JOIN:
                args = message_received['args']
 
                if args['id'] not in self.nodes_com:
@@ -95,11 +95,9 @@ class RingNode(threading.Thread):
                   self.inside_ring = True
                   self.successor_id = args['id']
                   self.successor_addr = args['addr']
-
-
-            if message_received['method'] == 'JOIN_REQ':
+            elif message_received['method'] == JOIN_REQ:
                self.node_join(message_received['args'])
-            elif message_received['method'] == 'RING_FORMED':
+            elif message_received['method'] == RING_FORMED:
                if self.inside_ring:
                   message_to_send = message_received
                   message_to_send['args'] += 1
@@ -108,7 +106,7 @@ class RingNode(threading.Thread):
 
                   if self.inside_ring_order != len(self.nodes_com):
                      self.send(self.successor_addr, message_to_send)
-            elif message_received['method'] == 'NODE_DISCOVERY':
+            elif message_received['method'] == NODE_DISCOVERY:
                self.discoveryReply(message_received['args'])
 
          # depois meter um refresh time dado pelo user e não fixo no if
