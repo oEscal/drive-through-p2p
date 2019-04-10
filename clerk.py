@@ -1,5 +1,6 @@
 import logging
 from RingNode import RingNode
+from utils import ENTITIES_NAMES
 
 logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
@@ -8,8 +9,9 @@ logging.basicConfig(level=logging.DEBUG,
 
 class Clerk(RingNode):
    id = 3
+   name = ENTITIES_NAMES[id]
    def __init__(self):
-      super().__init__(('127.0.0.' + str(1 + self.id), 5000), self.id)
+      super().__init__(('127.0.0.' + str(1 + self.id), 5000), self.id, self.name)
 
 
 def main():

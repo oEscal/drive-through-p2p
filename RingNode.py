@@ -5,19 +5,27 @@ import socket
 import threading
 import logging
 import pickle
+from utils import ENTITIES_NAMES
 
 class RingNode(threading.Thread):
-   def __init__(self, address, id, max_nodes=4, dht_address=None, timeout=3):
+   def __init__(self, address, id, name, max_nodes=4, ring_address=None, timeout=3):
       threading.Thread.__init__(self)
       self.id = id
       self.addr = address
-      self.dht_address = dht_address
+      self.ring_address = ring_address
       self.max_nodes = max_nodes
 
-      self.inside_dht = False
+      self.inside_ring = False
       self.successor_id = self.max_nodes*2
       self.successor_addr = self.addr
       self.nodes_com = []
+      self.name = name
+
+      self.entities = {}
+      for i in range(len(ENTITIES_NAMES)):
+         self.entities[ENTITIES_NAMES[i]] = None
+
+      self.inside_ring_order = 0
 
       self.socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
       self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
@@ -47,6 +55,20 @@ class RingNode(threading.Thread):
          address_send = ('127.0.0.' + str(i + 1), 5000)
          self.send(address_send, message_to_send)
 
+   def discoveryReply(self, args):
+      message_to_send = {'method': 'NODE_DISCOVERY', 'args': args.copy()}
+
+      if self.name == args['name'] and args['id'] is None:
+         message_to_send['args']['id'] = self.id
+      elif args['id'] is not None:
+         self.entities[args['name']] = args['id']
+         print(args['name'])
+         print(args['id'])
+         self.logger.debug('My table of entities: ' + str(self.entities))
+
+      if args['id'] != self.id:
+         self.send(self.successor_addr, message_to_send)
+
    def run(self):
       self.socket.bind(self.addr)
 
@@ -63,22 +85,34 @@ class RingNode(threading.Thread):
 
                # depois olhar para este if que pode ser melhorado
                if args['id'] > self.successor_id < self.id and len(self.nodes_com) > self.id + 1:
-                  self.inside_dht = False
+                  self.inside_ring = False
                   self.successor_id = self.max_nodes*2
                   self.successor_addr = self.addr
 
                if ((len(self.nodes_com) > 1 and
                        self.id == max(self.nodes_com) and args['id'] == min(self.nodes_com)) or
                        self.successor_id > args['id'] > self.id):
-                  self.inside_dht = True
+                  self.inside_ring = True
                   self.successor_id = args['id']
                   self.successor_addr = args['addr']
 
+
             if message_received['method'] == 'JOIN_REQ':
                self.node_join(message_received['args'])
+            elif message_received['method'] == 'RING_FORMED':
+               if self.inside_ring:
+                  message_to_send = message_received
+                  message_to_send['args'] += 1
+
+                  self.inside_ring_order = message_to_send['args']
+
+                  if self.inside_ring_order != len(self.nodes_com):
+                     self.send(self.successor_addr, message_to_send)
+            elif message_received['method'] == 'NODE_DISCOVERY':
+               self.discoveryReply(message_received['args'])
 
          # depois meter um refresh time dado pelo user e não fixo no if
-         if not self.inside_dht or time.time() - delta_time > 2:
+         if not self.inside_ring or time.time() - delta_time > 2:
             self.requestJoin()
             delta_time = time.time()
 
