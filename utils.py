@@ -1,13 +1,22 @@
 # messages's methods
 NODE_JOIN = 0
-JOIN_REQ = 1
-RING_FORMED = 2
-NODE_DISCOVERY = 3
+NODE_DISCOVERY = 1
+ORDER = 2
+PICKUP = 3
+TOKEN = 4
 
 # get by id
 ENTITIES_NAMES = [
    'Restaurant',
    'Chef',
    'Clerk',
-   'Receptionist'
+   'Waiter'
 ]
+
+# equipment variables
+GRILL_MEAN = 3
+GRILL_STD = 0.5
+FRIDGE_MEAN = 1
+FRIDGE_STD = 0.5
+FRYER_MEAN = 5
+FRYER_STD = 0.5

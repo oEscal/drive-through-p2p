@@ -7,18 +7,21 @@ logging.basicConfig(level=logging.DEBUG,
                     datefmt='%m-%d %H:%M:%S')
 
 
-class Receptionist(RingNode):
-   id = 1
-   name = ENTITIES_NAMES[id]
+class Receptionist:
    def __init__(self):
-      super().__init__(('127.0.0.' + str(1 + self.id), 5000), self.id, self.name)
+      self.id = 1
+      self.name = ENTITIES_NAMES[self.id]
+      self.node = RingNode(('127.0.0.' + str(1 + self.id), 5000), self.id, self.name)
+
+   def start_node(self):
+      self.node.start()
 
 
 def main():
    logger = logging.getLogger('restaurant')
 
    restaurant = Receptionist()
-   restaurant.start()
+   restaurant.start_node()
    logger.debug('started')
 
 main()
