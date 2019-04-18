@@ -1,6 +1,7 @@
 # coding: utf-8
 
 import random
+import uuid
 import time
 import logging
 import threading
@@ -31,11 +32,11 @@ class Waiter(threading.Thread):
       while True:
          # receive a new client's order
          orders = self.node.in_queue.get()
-         logger.debug("Received new order from client: " + str(orders))
+         logger.debug("Received new order from client: " + str(orders['food']))
 
          # verify if there are empty orders
          order_to_cooker = []
-         for food in orders:
+         for food in orders['food']:
             if food.number != 0:
                order_to_cooker.append(food)
 
@@ -43,5 +44,8 @@ class Waiter(threading.Thread):
          time.sleep(random.gauss(self.mean, self.std))
 
          if len(order_to_cooker) != 0:
-            self.node.sendMessageToToken(self.node.entities['Chef'], order_to_cooker)
+            ticket = uuid.uuid1()
+            self.node.sendMessageToToken(self.node.entities['Chef'], {'type':'REQ','value':{'client_address':orders['address'],'ticket':ticket,'food':order_to_cooker}})
             logger.debug("Chef order sent: " + str(order_to_cooker))
+            self.node.send(orders['address'],{'type':'TICKET','args':ticket})
+

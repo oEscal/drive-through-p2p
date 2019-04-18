@@ -21,7 +21,7 @@ def main(port, ring, timeout):
 
    # UDP Socket
    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-   sock.settimeout(timeout)
+   #sock.settimeout(timeout)
    sock.bind(('localhost', port))
 
    # Wait for a random time
@@ -33,31 +33,33 @@ def main(port, ring, timeout):
    logger.info('Request some food...')
    p = pickle.dumps({
       'method': ORDER,
-      'args': [
+      'args': {'address':('localhost', port),'food':[
          Hamburger(random.randint(0, 5)),
          Drink(random.randint(0, 5)),
          Chips(random.randint(0, 5))
-      ]
+      ]}
    })
+
+    
    sock.sendto(p, ring)
 
    # Wait for Ticket
    p, addr = sock.recvfrom(1024)
    o = pickle.loads(p)
-   logger.info('Received ticket %s', o[args])
+   logger.info('Received ticket %s', o['args'])
 
    # Pickup order
-   logger.info('Pickup order %s', o[args])
-   p = pickle.dumps({"method": PICKUP, "args": o[args]})
+   logger.info('Pickup order %s', o['args'])
+   p = pickle.dumps({"method": PICKUP, "args": o['args']})
    sock.sendto(p, ring)
 
    # Wait for order
    p, addr = sock.recvfrom(1024)
    o = pickle.loads(p)
-   logger.info('Got order %s', o[args])
+   logger.info('Got order %s', o['args'])
 
    # Close socket
-   socket.close()
+   sock.close()
 
    return 0
 

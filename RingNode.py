@@ -128,6 +128,9 @@ class RingNode(threading.Thread):
             elif message_received['method'] == ORDER:
                self.logger.debug("Message received from client: " + str(message_received))
                self.sendMessageToToken(self.entities['Waiter'], message_received['args'])
+            elif message_received['method'] == PICKUP:
+               self.logger.debug("Message received from client: " + str(message_received))
+               self.sendMessageToToken(self.entities['Clerk'], {'type':'PICK','value':message_received['args']})
             elif message_received['method'] == TOKEN:
                id_destination = message_received['args']['id']
                message_to_send = message_received
@@ -155,7 +158,7 @@ class RingNode(threading.Thread):
             self.requestJoin()
             delta_time = time.time()
 
-            self.logger.debug("Me: " + str(self.addr) + "\nSuccessor:" + str(self.successor_addr) + "\n")
+            #self.logger.debug("Me: " + str(self.addr) + "\nSuccessor:" + str(self.successor_addr) + "\n")
 
          if self.coordinator and self.inside_ring and len(self.nodes_com) == self.max_nodes:
             if not self.allNodesDiscovered():

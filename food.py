@@ -1,10 +1,14 @@
 from kitchen_equipments import Grill, Fridge, Fryer
 
 class Food:
-   def __init__(self, name, number, equipment_required_to_cook):
-      self.name = name
-      self.number = number
-      self.equipment_required_to_cook = equipment_required_to_cook
+      def __init__(self, name, number, equipment_required_to_cook):
+            self.name = name
+            self.number = number
+            self.equipment_required_to_cook = equipment_required_to_cook
+            self.cooked = False
+      def __str__(self):
+            return str(self.name) + " "+ str(self.number)
+
 
 
 class Hamburger(Food):
