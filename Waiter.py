@@ -6,7 +6,7 @@ import time
 import logging
 import threading
 from RingNode import RingNode
-from food import Food
+from utils import NEW_ORDER, TICKET
 
 logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
@@ -45,7 +45,25 @@ class Waiter(threading.Thread):
 
          if len(order_to_cooker) != 0:
             ticket = uuid.uuid1()
-            self.node.sendMessageToToken(self.node.entities['Chef'], {'type':'REQ','value':{'client_address':orders['address'],'ticket':ticket,'food':order_to_cooker}})
+
+            # send request to chef
+            message_to_send = {
+               'type': NEW_ORDER,
+               'value': {
+                  'client_address': orders['address'],
+                  'ticket': ticket,
+                  'food': order_to_cooker
+               }
+            }
+
+            self.node.sendMessageToToken(self.node.entities['Chef'], message_to_send)
             logger.debug("Chef order sent: " + str(order_to_cooker))
-            self.node.send(orders['address'],{'type':'TICKET','args':ticket})
+
+
+            # send the ticket to the client
+            message_to_send = {
+               'type': TICKET,
+               'args': ticket
+            }
+            self.node.send(orders['address'], message_to_send)
 

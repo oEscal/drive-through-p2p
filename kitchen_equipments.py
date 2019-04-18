@@ -1,12 +1,11 @@
 import time
 import random
-from utils import GRILL_MEAN, GRILL_STD, FRIDGE_MEAN, FRIDGE_STD, FRYER_MEAN, FRYER_STD, REQUEST_GRILLER, REQUEST_FRIDGE, REQUEST_FRYER
+from utils import GRILL_MEAN, GRILL_STD, FRIDGE_MEAN, FRIDGE_STD, FRYER_MEAN, FRYER_STD
 
 class KitchenEquipment:
-   def __init__(self, mean, std,number ):
+   def __init__(self, mean, std):
       self.mean = mean
       self.std = std
-      self.request_number = number
 
    def cook(self, number):
       for i in range(number):
@@ -15,12 +14,12 @@ class KitchenEquipment:
 
 class Grill(KitchenEquipment):
    def __init__(self):
-      super().__init__(GRILL_MEAN, GRILL_STD,REQUEST_GRILLER)
+      super().__init__(GRILL_MEAN, GRILL_STD)
 
 class Fridge(KitchenEquipment):
    def __init__(self):
-      super().__init__(FRIDGE_MEAN, FRIDGE_STD,REQUEST_FRIDGE)
+      super().__init__(FRIDGE_MEAN, FRIDGE_STD)
 
 class Fryer(KitchenEquipment):
    def __init__(self):
-      super().__init__(FRYER_MEAN, FRYER_STD,REQUEST_FRYER)
+      super().__init__(FRYER_MEAN, FRYER_STD)

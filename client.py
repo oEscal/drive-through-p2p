@@ -8,6 +8,7 @@ import logging
 import argparse
 from utils import ORDER, PICKUP
 from food import Hamburger, Drink, Chips
+from utils import TICKET
 
 
 logging.basicConfig(level=logging.DEBUG,

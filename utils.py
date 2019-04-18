@@ -4,9 +4,20 @@ NODE_DISCOVERY = 1
 ORDER = 2
 PICKUP = 3
 TOKEN = 4
-REQUEST_GRILLER = 5
-REQUEST_FRIDGE = 6
-REQUEST_FRYER = 7
+TICKET = 5
+
+# request equipment
+REQUEST_GRILL = 0
+REQUEST_FRIDGE = 1
+REQUEST_FRYER = 2
+
+# message type to contact with the entities
+NEW_ORDER = 0
+ACKNOWLEDGE = 1
+RETURN_EQ = 2
+FOOD_DONE = 3
+PICK = 4
+
 
 # get by id
 ENTITIES_NAMES = [

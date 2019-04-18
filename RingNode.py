@@ -6,7 +6,7 @@ import threading
 import logging
 import pickle
 import queue
-from utils import NODE_JOIN, ENTITIES_NAMES, NODE_DISCOVERY, ORDER, PICKUP, TOKEN
+from utils import NODE_JOIN, ENTITIES_NAMES, NODE_DISCOVERY, ORDER, PICKUP, TOKEN, PICK
 
 class RingNode(threading.Thread):
    def __init__(self, address, id, name, max_nodes=4, ring_address=None, timeout=3):
@@ -130,7 +130,12 @@ class RingNode(threading.Thread):
                self.sendMessageToToken(self.entities['Waiter'], message_received['args'])
             elif message_received['method'] == PICKUP:
                self.logger.debug("Message received from client: " + str(message_received))
-               self.sendMessageToToken(self.entities['Clerk'], {'type':'PICK','value':message_received['args']})
+
+               message_to_send = {
+                  'type': PICK,
+                  'value': message_received['args']
+               }
+               self.sendMessageToToken(self.entities['Clerk'], message_to_send)
             elif message_received['method'] == TOKEN:
                id_destination = message_received['args']['id']
                message_to_send = message_received
@@ -158,7 +163,7 @@ class RingNode(threading.Thread):
             self.requestJoin()
             delta_time = time.time()
 
-            #self.logger.debug("Me: " + str(self.addr) + "\nSuccessor:" + str(self.successor_addr) + "\n")
+            self.logger.debug("Me: " + str(self.addr) + "\nSuccessor:" + str(self.successor_addr) + "\n")
 
          if self.coordinator and self.inside_ring and len(self.nodes_com) == self.max_nodes:
             if not self.allNodesDiscovered():
