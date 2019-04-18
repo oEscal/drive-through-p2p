@@ -95,6 +95,7 @@ class RingNode(threading.Thread):
       self.socket.bind(self.addr)
 
       delta_time = time.time()
+      token_sent = False
       while True:
          p, addr = self.recv()
          if p is not None:
@@ -129,10 +130,18 @@ class RingNode(threading.Thread):
                self.sendMessageToToken(self.entities['Waiter'], message_received['args'])
             elif message_received['method'] == TOKEN:
                id_destination = message_received['args']['id']
+               message_to_send = message_received
+
                if id_destination == self.id:
                   self.in_queue.put(message_received['args']['order'])
+                  message_to_send = {
+                     'method': TOKEN,
+                     'args': {
+                        'id': None,
+                        'order': None
+                     }
+                  }
 
-               message_to_send = message_received
                if self.out_queue.qsize() > 0 and (id_destination == self.id
                   or id_destination is None):
                   message_to_send = self.out_queue.get()
@@ -142,7 +151,7 @@ class RingNode(threading.Thread):
                self.send(self.successor_addr, message_received)
 
          # depois meter um refresh time dado pelo user e não fixo no if
-         if not self.inside_ring or time.time() - delta_time > 2:
+         if not self.inside_ring or time.time() - delta_time > 3:
             self.requestJoin()
             delta_time = time.time()
 
@@ -154,7 +163,7 @@ class RingNode(threading.Thread):
                   if self.entities[i] is None:
                      message_to_send = {'method': NODE_DISCOVERY, 'args': {'name': i, 'id': None}}
                      self.send(self.successor_addr, message_to_send)
-            else:
+            elif not token_sent:
                message_to_send = {
                   'method': TOKEN,
                   'args': {
@@ -163,3 +172,5 @@ class RingNode(threading.Thread):
                   }
                }
                self.send(self.successor_addr, message_to_send)
+               token_sent = True
+               self.logger.debug("TOKEN SENT!")
