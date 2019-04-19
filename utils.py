@@ -1,10 +1,11 @@
 # messages's methods
 NODE_JOIN = 0
-NODE_DISCOVERY = 1
-ORDER = 2
-PICKUP = 3
-TOKEN = 4
-TICKET = 5
+REQUEST_INFO = 1
+NODE_DISCOVERY = 2
+ORDER = 3
+PICKUP = 4
+TOKEN = 5
+TICKET = 6
 
 # request equipment
 REQUEST_GRILL = 0

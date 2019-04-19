@@ -1,11 +1,6 @@
 # coding: utf-8
 
-import time
-import pickle
-import socket
-import random
 import logging
-import argparse
 import threading
 import queue
 from RingNode import RingNode
@@ -76,8 +71,8 @@ class Chef(threading.Thread):
                current_food_equipment_class = self.last_order[i].equipment_required_to_cook.__class__
 
                if current_food_equipment_class == equipment_received_class:
-                  #recieve the ACK from restaurant and then cooks the food   
-                  self.cook(orders['value'], self.last_order[i]) 
+                  #recieve the ACK from restaurant and then cooks the food
+                  self.cook(orders['value'], self.last_order[i])
                   self.last_order.pop(i)
 
                   # return the equipment to the restaurant
@@ -90,28 +85,23 @@ class Chef(threading.Thread):
                   self.requests(self.last_order)
                   break
 
-         if self.last_order is not None:
-            if len(self.last_order) == 0:
+         if self.last_order is not None and len(self.last_order) == 0:
+            # inform the clerk that the food is done
+            message_to_send = {
+               'type': FOOD_DONE,
+               'value': self.order_to_client
+            }
+            self.node.sendMessageToToken(self.node.entities['Clerk'], message_to_send)    #send the request to clerk
+            logger.debug("Sending to clerk : %s", message_to_send)
+            self.last_order = None
+            self.order_to_client = {}
 
-               # inform the clerk that the food is done
-               message_to_send = {
-                  'type': FOOD_DONE,
-                  'value': self.order_to_client
-               }
-               self.node.sendMessageToToken(self.node.entities['Clerk'], message_to_send)    #send the request to clerk
-               logger.debug("Sending to clerk : %s", message_to_send)
+         if self.last_order is None and not self.pending_orders.empty():
+            new_order = self.pending_orders.get()
 
-               self.last_order = None
-               self.order_to_client = {}
-            if not self.pending_orders.empty():
-               self.last_order = self.pending_orders.get()
-         else:
-            if not self.pending_orders.empty():
-               new_order = self.pending_orders.get()
+            self.order_to_client['ticket'] = new_order['ticket']
+            self.order_to_client['client_address'] = new_order['client_address']
+            self.order_to_client['food'] = []
+            self.last_order = new_order['food']
 
-               self.order_to_client['ticket'] = new_order['ticket']
-               self.order_to_client['client_address'] = new_order['client_address']
-               self.order_to_client['food'] = []
-               self.last_order = new_order['food']
-
-               self.requests(self.last_order)
+            self.requests(self.last_order)

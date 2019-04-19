@@ -6,7 +6,7 @@ import threading
 import logging
 import pickle
 import queue
-from utils import NODE_JOIN, ENTITIES_NAMES, NODE_DISCOVERY, ORDER, PICKUP, TOKEN, PICK
+from utils import NODE_JOIN, REQUEST_INFO, ENTITIES_NAMES, NODE_DISCOVERY, ORDER, PICKUP, TOKEN, PICK
 
 class RingNode(threading.Thread):
    def __init__(self, address, id, name, max_nodes=4, ring_address=None, timeout=3):
@@ -54,13 +54,20 @@ class RingNode(threading.Thread):
          else:
             return p, addr
 
-   def requestJoin(self):
-      message_to_send = {'method': NODE_JOIN, 'args': {'addr': self.addr, 'id': self.id}}
-
-      # multicast
+   def broadcast(self, message_to_send):
       for i in range(254):
          address_send = ('127.0.0.' + str(i + 1), 5000)
          self.send(address_send, message_to_send)
+
+   def requestJoin(self):
+      # send info about me to other nodes
+      message_to_send = {'method': NODE_JOIN, 'args': {'addr': self.addr, 'id': self.id}}
+      self.broadcast(message_to_send)
+
+   def requestInfo(self):
+      # request info about other nodes (because they can already be in a ring and this is to accelarate the process of enter the ring)
+      message_to_send = {'method': REQUEST_INFO, 'args': {'addr': self.addr, 'id': self.id}}
+      self.broadcast(message_to_send)
 
    def discoveryReply(self, args):
       message_to_send = {'method': NODE_DISCOVERY, 'args': args.copy()}
@@ -69,7 +76,7 @@ class RingNode(threading.Thread):
          message_to_send['args']['id'] = self.id
       elif args['id'] is not None:
          self.entities[args['name']] = args['id']
-         self.logger.debug('My table of entities: ' + str(self.entities))
+         # self.logger.debug('My table of entities: ' + str(self.entities))
 
       if args['id'] != self.id:
          self.send(self.successor_addr, message_to_send)
@@ -96,11 +103,16 @@ class RingNode(threading.Thread):
 
       delta_time = time.time()
       token_sent = False
+
       while True:
          p, addr = self.recv()
          if p is not None:
             message_received = pickle.loads(p)
-            if message_received['method'] == NODE_JOIN:
+
+            if message_received['method'] == REQUEST_INFO:
+               message_to_send = {'method': NODE_JOIN, 'args': {'addr': self.addr, 'id': self.id}}
+               self.send(message_received['args']['addr'], message_to_send)
+            elif message_received['method'] == NODE_JOIN:
                args = message_received['args']
 
                if args['id'] not in self.nodes_com:
@@ -111,18 +123,19 @@ class RingNode(threading.Thread):
                if self.id <= min(self.nodes_com):
                   self.coordinator = True
 
-               # depois olhar para este if que pode ser melhorado
                if args['id'] > self.successor_id and self.successor_id < self.id and len(self.nodes_com) > self.id + 1:
                   self.inside_ring = False
                   self.successor_id = self.max_nodes*2
                   self.successor_addr = self.addr
 
-               if ((len(self.nodes_com) > 1 and
-                       self.id == max(self.nodes_com) and args['id'] == min(self.nodes_com)) or
-                       self.successor_id > args['id'] > self.id):
+               if (len(self.nodes_com) > 1 and self.id == max(self.nodes_com) and args['id'] == min(self.nodes_com)
+                       or self.successor_id > args['id'] > self.id):
                   self.inside_ring = True
                   self.successor_id = args['id']
                   self.successor_addr = args['addr']
+
+                  self.logger.debug("Me: " + str(self.addr) + "\nSuccessor:" + str(self.successor_addr) + "\n")
+
             elif message_received['method'] == NODE_DISCOVERY:
                self.discoveryReply(message_received['args'])
             elif message_received['method'] == ORDER:
@@ -158,12 +171,8 @@ class RingNode(threading.Thread):
             else:
                self.send(self.successor_addr, message_received)
 
-         # depois meter um refresh time dado pelo user e não fixo no if
-         if not self.inside_ring or time.time() - delta_time > 3:
-            self.requestJoin()
-            delta_time = time.time()
-
-            self.logger.debug("Me: " + str(self.addr) + "\nSuccessor:" + str(self.successor_addr) + "\n")
+         if not self.inside_ring:
+            self.requestInfo()
 
          if self.coordinator and self.inside_ring and len(self.nodes_com) == self.max_nodes:
             if not self.allNodesDiscovered():
@@ -181,4 +190,4 @@ class RingNode(threading.Thread):
                }
                self.send(self.successor_addr, message_to_send)
                token_sent = True
-               self.logger.debug("TOKEN SENT!")
+               self.logger.debug("TOKEN SENT BEFORE %s SECONDS!", str(time.time() - delta_time))

@@ -1,11 +1,6 @@
 # coding: utf-8
 
-import time
-import pickle
-import socket
-import random
 import logging
-import argparse
 
 from Restaurant import Restaurant
 from Waiter import Waiter

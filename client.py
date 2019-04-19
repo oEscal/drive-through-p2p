@@ -8,7 +8,6 @@ import logging
 import argparse
 from utils import ORDER, PICKUP
 from food import Hamburger, Drink, Chips
-from utils import TICKET
 
 
 logging.basicConfig(level=logging.DEBUG,
@@ -34,7 +33,7 @@ def main(port, ring, timeout):
    logger.info('Request some food...')
    p = pickle.dumps({
       'method': ORDER,
-      'args': {'address':('localhost', port),'food':[
+      'args': {'address': ('localhost', port), 'food': [
          Hamburger(random.randint(0, 5)),
          Drink(random.randint(0, 5)),
          Chips(random.randint(0, 5))

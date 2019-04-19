@@ -9,7 +9,7 @@ class KitchenEquipment:
 
    def cook(self, number):
       for i in range(number):
-         time.sleep(random.gauss(self.mean, self.std))
+         time.sleep(abs(random.gauss(self.mean, self.std)))
 
 
 class Grill(KitchenEquipment):
