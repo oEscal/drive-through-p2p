@@ -6,6 +6,8 @@ ORDER = 3
 PICKUP = 4
 TOKEN = 5
 TICKET = 6
+KEEP_ALIVE = 7
+IM_ALIVE = 8
 
 # request equipment
 REQUEST_GRILL = 0

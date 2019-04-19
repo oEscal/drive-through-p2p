@@ -6,10 +6,10 @@ import threading
 import logging
 import pickle
 import queue
-from utils import NODE_JOIN, REQUEST_INFO, ENTITIES_NAMES, NODE_DISCOVERY, ORDER, PICKUP, TOKEN, PICK
+from utils import NODE_JOIN, REQUEST_INFO, ENTITIES_NAMES, NODE_DISCOVERY, ORDER, PICKUP, TOKEN, PICK, KEEP_ALIVE, IM_ALIVE
 
 class RingNode(threading.Thread):
-   def __init__(self, address, id, name, max_nodes=4, ring_address=None, timeout=3):
+   def __init__(self, address, id, name, max_nodes=4, ring_address=None, timeout=3, refresh_time=3):
       threading.Thread.__init__(self)
       self.id = id
       self.addr = address
@@ -21,6 +21,8 @@ class RingNode(threading.Thread):
       self.successor_addr = self.addr
       self.nodes_com = []
       self.name = name
+
+      self.refresh_time = refresh_time
 
       self.entities = {}
       for i in range(len(ENTITIES_NAMES)):
@@ -65,7 +67,8 @@ class RingNode(threading.Thread):
       self.broadcast(message_to_send)
 
    def requestInfo(self):
-      # request info about other nodes (because they can already be in a ring and this is to accelarate the process of enter the ring)
+      # request info about other nodes (because they can already be in
+      # the ring and this is to accelerate the process of enter the ring)
       message_to_send = {'method': REQUEST_INFO, 'args': {'addr': self.addr, 'id': self.id}}
       self.broadcast(message_to_send)
 
@@ -102,6 +105,8 @@ class RingNode(threading.Thread):
       self.socket.bind(self.addr)
 
       delta_time = time.time()
+      im_alive_time = time.time()
+      time_since_last_alive = time.time()
       token_sent = False
 
       while True:
@@ -112,7 +117,7 @@ class RingNode(threading.Thread):
             if message_received['method'] == REQUEST_INFO:
                message_to_send = {'method': NODE_JOIN, 'args': {'addr': self.addr, 'id': self.id}}
                self.send(message_received['args']['addr'], message_to_send)
-            elif message_received['method'] == NODE_JOIN:
+            if message_received['method'] == NODE_JOIN or message_received['method'] == REQUEST_INFO:
                args = message_received['args']
 
                if args['id'] not in self.nodes_com:
@@ -133,9 +138,18 @@ class RingNode(threading.Thread):
                   self.inside_ring = True
                   self.successor_id = args['id']
                   self.successor_addr = args['addr']
+                  time_since_last_alive = time.time()
 
                   self.logger.debug("Me: " + str(self.addr) + "\nSuccessor:" + str(self.successor_addr) + "\n")
 
+            elif message_received['method'] == KEEP_ALIVE:
+               message_to_send = {
+                  'method': IM_ALIVE,
+                  'args': None
+               }
+               self.send(addr, message_to_send)
+            elif message_received['method'] == IM_ALIVE:
+               time_since_last_alive = time.time()
             elif message_received['method'] == NODE_DISCOVERY:
                self.discoveryReply(message_received['args'])
             elif message_received['method'] == ORDER:
@@ -167,12 +181,34 @@ class RingNode(threading.Thread):
                   or id_destination is None):
                   message_to_send = self.out_queue.get()
 
-               self.send(self.successor_addr, message_to_send)
+               if len(self.nodes_com) == self.max_nodes:
+                  self.send(self.successor_addr, message_to_send)
+               else:
+                  self.logger.debug("TOKEN REMOVED!")
             else:
                self.send(self.successor_addr, message_received)
 
          if not self.inside_ring:
             self.requestInfo()
+
+         if self.inside_ring and time.time() - im_alive_time > self.refresh_time:
+            im_alive_time = time.time()
+
+            message_to_send = {
+               'method': KEEP_ALIVE,
+               'args': None
+            }
+
+            self.send(self.successor_addr, message_to_send)
+
+         if self.inside_ring and time.time() - time_since_last_alive > self.refresh_time*2:
+            if self.successor_id in self.nodes_com:
+               self.nodes_com.pop(self.nodes_com.index(self.successor_id))
+
+            self.inside_ring = False
+            self.successor_id = self.max_nodes * 2
+            self.successor_addr = self.addr
+            token_sent = False
 
          if self.coordinator and self.inside_ring and len(self.nodes_com) == self.max_nodes:
             if not self.allNodesDiscovered():
