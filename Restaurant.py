@@ -44,7 +44,7 @@ class Restaurant(threading.Thread):
       self.node.start()
 
       while True:
-         request = self.node.in_queue.get()  # request do chef para uso de equipamentos
+         request = self.node.in_queue.get()  # chef request for equipment usage
          logger.debug("Received new message: " + str(request))
          if 'type' not in request:
             current_index = 0
