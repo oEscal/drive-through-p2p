@@ -29,7 +29,7 @@ class Clerk(threading.Thread):
       self.food_done = queue.Queue()
       self.pickups = []
       
-   def set_order(self, food):    # reencaminhar a ordem de comida para o respetivo cliente
+   def set_order(self, food):    #forward the food order to its customer
       for client_id in self.pickups:
          if client_id == food['ticket']:
             logger.debug("Given food %s to %s", str(food['food']), str(client_id))
@@ -43,10 +43,10 @@ class Clerk(threading.Thread):
       while True:
          request = self.node.in_queue.get()
 
-         if request['type']  == FOOD_DONE:   # adicionar numa fila os pedidos de comida prontos
+         if request['type']  == FOOD_DONE:   #add ready food orders in a queue
              logger.debug("Food done %s", request['value'])
              self.food_done.put(request['value'])
-         elif request['type'] == PICK: # adicionar numa lista os clientes prontos para pagamento
+         elif request['type'] == PICK: #add customers ready for payment in a list
              logger.debug("Pickup request %s",request['value'])
              self.pickups.append(request['value'])
 

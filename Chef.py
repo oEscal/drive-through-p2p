@@ -32,7 +32,7 @@ class Chef(threading.Thread):
       self.last_order = None
       self.order_to_client = {}
 
-   def choose_request(self, food): #escolhe o request a ser feito dependendo do tipo de comida
+   def choose_request(self, food): #return request value according to the food
       if food.__class__ == Hamburger:
          return REQUEST_GRILL
       elif food.__class__ == Drink:
@@ -41,7 +41,7 @@ class Chef(threading.Thread):
          return REQUEST_FRYER
       return None
 
-   def requests(self, order): #o chef faz request ao server para uso de equipamentos
+   def requests(self, order): #chef do request to the restaurant to equipment usage
       equipments_to_request = []
       for food in order:
          equipments_to_request.append(self.choose_request(food))
@@ -51,9 +51,9 @@ class Chef(threading.Thread):
          self.node.sendMessageToToken(self.node.entities['Restaurant'], equipments_to_request)
          logger.debug("Requesting %s", equipments_to_request)
 
-   def cook(self, equipment, food): # o chef no fim de receber ACK do restaurante do uso de equipamentos , cozinha
+   def cook(self, equipment, food): #cooking function,after the necessary ack
       equipment.cook(food.number)
-      logger.debug("I cooked %s!\n\n\n\n", str(food))
+      logger.debug("I cooked %s!\n", str(food))
 
       self.order_to_client['food'].append(food)
 
@@ -61,11 +61,12 @@ class Chef(threading.Thread):
       self.node.start()
 
       while True:
-         orders = self.node.in_queue.get() #receber ordens de ACK do restaurante ou de REQ do waiter
+         #recieving ACK orders from restaurant or food requests from waiter to be cooked
+         orders = self.node.in_queue.get()
 
          if orders['type'] == NEW_ORDER:
             logger.debug("Received new order from waiter: " + str(orders['value']))
-            self.pending_orders.put(orders['value'])  # guarda os pedidos numa fila
+            self.pending_orders.put(orders['value'])  # save requests in queue
 
          elif orders['type'] == ACKNOWLEDGE and self.last_order is not None:
             logger.debug("Received equipment: " + str(orders['value']))
@@ -75,7 +76,8 @@ class Chef(threading.Thread):
                current_food_equipment_class = self.last_order[i].equipment_required_to_cook.__class__
 
                if current_food_equipment_class == equipment_received_class:
-                  self.cook(orders['value'], self.last_order[i]) #recebe o ACK do uso de equipamente do restaurante e cozinha a comida respetiva
+                  #recieve the ACK from restaurant and then cooks the food   
+                  self.cook(orders['value'], self.last_order[i]) 
                   self.last_order.pop(i)
 
                   # return the equipment to the restaurant
@@ -96,8 +98,8 @@ class Chef(threading.Thread):
                   'type': FOOD_DONE,
                   'value': self.order_to_client
                }
-               self.node.sendMessageToToken(self.node.entities['Clerk'], message_to_send)    # envia o pedido para o clerk
-               logger.debug("Sending to clerk : %s", self.last_order)
+               self.node.sendMessageToToken(self.node.entities['Clerk'], message_to_send)    #send the request to clerk
+               logger.debug("Sending to clerk : %s", message_to_send)
 
                self.last_order = None
                self.order_to_client = {}
