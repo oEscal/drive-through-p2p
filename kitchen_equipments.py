@@ -10,6 +10,7 @@ class KitchenEquipment:
    def cook(self, number):
       for i in range(number):
          time.sleep(abs(random.gauss(self.mean, self.std)))
+
    def __str__(self):
       return self.__class__.__name__
 
