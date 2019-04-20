@@ -37,3 +37,11 @@ FRIDGE_MEAN = 1
 FRIDGE_STD = 0.5
 FRYER_MEAN = 5
 FRYER_STD = 0.5
+
+
+def print_out(input):
+   string_order = ""
+   for i in range(len(input)-1):
+      string_order+=str(input[i]) + ","
+   string_order+=str(input[len(input)-1])
+   return string_order

@@ -6,7 +6,7 @@ import time
 import logging
 import threading
 from RingNode import RingNode
-from utils import NEW_ORDER, TICKET
+from utils import NEW_ORDER, TICKET, print_out
 
 logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
@@ -32,7 +32,7 @@ class Waiter(threading.Thread):
       while True:
          # receive a new client's order
          orders = self.node.in_queue.get()
-         logger.debug("Received new order from client: " + str(orders['food']))
+         logger.debug("Received new order from client: " + print_out(orders['food']))
 
          # verify if there are empty orders
          order_to_cooker = []
@@ -57,7 +57,7 @@ class Waiter(threading.Thread):
             }
 
             self.node.sendMessageToToken(self.node.entities['Chef'], message_to_send)
-            logger.debug("Chef order sent: " + str(order_to_cooker))
+            logger.debug("Chef order sent: " + print_out(order_to_cooker))
 
 
             # send the ticket to the client

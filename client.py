@@ -6,7 +6,7 @@ import socket
 import random
 import logging
 import argparse
-from utils import ORDER, PICKUP
+from utils import ORDER, PICKUP, print_out
 from food import Hamburger, Drink, Chips
 
 
@@ -39,8 +39,8 @@ def main(port, ring, timeout):
          Chips(random.randint(0, 5))
       ]}
    })
-
-    
+   
+   logger.debug("Requesting %s",print_out(pickle.loads(p)['args']['food']))
    sock.sendto(p, ring)
 
    # Wait for Ticket
@@ -56,7 +56,7 @@ def main(port, ring, timeout):
    # Wait for order
    p, addr = sock.recvfrom(1024)
    o = pickle.loads(p)
-   logger.info('Got order %s', o['args'])
+   logger.info('Got order %s',print_out(o['args']))
 
    # Close socket
    sock.close()

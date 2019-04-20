@@ -3,9 +3,10 @@
 import logging
 import threading
 import queue
+import copy
 from RingNode import RingNode
 from food import Hamburger, Chips, Drink
-from utils import REQUEST_GRILL, REQUEST_FRIDGE, REQUEST_FRYER, ACKNOWLEDGE, RETURN_EQ, NEW_ORDER, FOOD_DONE
+from utils import REQUEST_GRILL, REQUEST_FRIDGE, REQUEST_FRYER, ACKNOWLEDGE, RETURN_EQ, NEW_ORDER, FOOD_DONE, print_out
 
 logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
@@ -60,7 +61,10 @@ class Chef(threading.Thread):
          orders = self.node.in_queue.get()
 
          if orders['type'] == NEW_ORDER:
-            logger.debug("Received new order from waiter: " + str(orders['value']))
+            message_received_copy = copy.deepcopy(orders['value'])
+            message_received_copy['food'] = print_out(message_received_copy['food'])
+
+            logger.debug("Received new order from waiter: " + str(message_received_copy))
             self.pending_orders.put(orders['value'])  # save requests in queue
 
          elif orders['type'] == ACKNOWLEDGE and self.last_order is not None:
@@ -91,8 +95,12 @@ class Chef(threading.Thread):
                'type': FOOD_DONE,
                'value': self.order_to_client
             }
+            
+            message_received_copy = copy.deepcopy(message_to_send)
+            message_received_copy['value']['food'] = print_out(message_received_copy['value']['food'])
+
             self.node.sendMessageToToken(self.node.entities['Clerk'], message_to_send)    #send the request to clerk
-            logger.debug("Sending to clerk : %s", message_to_send)
+            logger.debug("Sending to clerk : %s", str(message_received_copy))
             self.last_order = None
             self.order_to_client = {}
 

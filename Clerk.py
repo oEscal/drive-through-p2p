@@ -3,8 +3,9 @@
 import logging
 import threading
 import queue
+import copy
 from RingNode import RingNode
-from utils import FOOD_DONE, PICK
+from utils import FOOD_DONE, PICK, print_out
 
 logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
@@ -27,7 +28,7 @@ class Clerk(threading.Thread):
    def set_order(self, food):    #forward the food order to its customer
       for client_id in self.pickups:
          if client_id == food['ticket']:
-            logger.debug("Given food %s to %s", str(food['food']), str(client_id))
+            logger.debug("Given food %s to %s", print_out(food['food']), str(client_id))
             self.node.send(food['client_address'], {'type': 'GIVEN', 'args': food['food']})
             self.food_done.get()    # to remove the given food
             self.pickups.remove(client_id)   # remove client_id picked
@@ -37,9 +38,16 @@ class Clerk(threading.Thread):
 
       while True:
          request = self.node.in_queue.get()
+         
+        
+
 
          if request['type']  == FOOD_DONE:   #add ready food orders in a queue
-             logger.debug("Food done %s", request['value'])
+             message_received_copy = copy.deepcopy(request)
+             message_received_copy['value']['food'] = print_out(message_received_copy['value']['food'])
+
+
+             logger.debug("Food done %s", str(message_received_copy))
              self.food_done.put(request['value'])
          elif request['type'] == PICK: #add customers ready for payment in a list
              logger.debug("Pickup request %s",request['value'])

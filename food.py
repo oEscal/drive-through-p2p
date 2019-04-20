@@ -5,6 +5,8 @@ class Food:
       self.name = name
       self.number = number
       self.equipment_required_to_cook = equipment_required_to_cook
+   def __str__(self):
+      return str(self.number)+ " " +str(self.name) 
 
 class Hamburger(Food):
    name = "hamburger"

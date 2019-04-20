@@ -3,9 +3,10 @@
 import logging
 import threading
 import queue
+import copy
 from RingNode import RingNode
 from kitchen_equipments import Grill, Fryer, Fridge
-from utils import REQUEST_GRILL, REQUEST_FRIDGE, REQUEST_FRYER, ACKNOWLEDGE
+from utils import REQUEST_GRILL, REQUEST_FRIDGE, REQUEST_FRYER, ACKNOWLEDGE, print_out
 
 
 logging.basicConfig(level=logging.DEBUG,
@@ -40,7 +41,11 @@ class Restaurant(threading.Thread):
 
       while True:
          request = self.node.in_queue.get()  # chef request for equipment usage
-         logger.debug("Received new message: " + str(request))
+         message_received_copy = copy.deepcopy(request)
+         if type(request) is dict:
+            message_received_copy['value'] = str(message_received_copy['value'])
+
+         logger.debug("Received new message: " + str(message_received_copy))
          if 'type' not in request:
             current_index = 0
             while True:
