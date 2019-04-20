@@ -6,7 +6,7 @@ import queue
 import copy
 from RingNode import RingNode
 from kitchen_equipments import Grill, Fryer, Fridge
-from utils import REQUEST_GRILL, REQUEST_FRIDGE, REQUEST_FRYER, ACKNOWLEDGE, print_out
+from utils import REQUEST_GRILL, REQUEST_FRIDGE, REQUEST_FRYER, ACKNOWLEDGE, print_out, print_equipment_requests
 
 
 logging.basicConfig(level=logging.DEBUG,
@@ -41,9 +41,14 @@ class Restaurant(threading.Thread):
 
       while True:
          request = self.node.in_queue.get()  # chef request for equipment usage
+        
+         #this segment of code, was made due to print facility due to print facility, to cleary see what´s its happening
          message_received_copy = copy.deepcopy(request)
-         if type(request) is dict:
+         if type(request) is dict: 
             message_received_copy['value'] = str(message_received_copy['value'])
+         elif type(request) is list:
+            message_received_copy = print_equipment_requests(request)
+         #
 
          logger.debug("Received new message: " + str(message_received_copy))
          if 'type' not in request:

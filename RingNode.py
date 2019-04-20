@@ -7,7 +7,7 @@ import logging
 import pickle
 import queue
 import copy
-from utils import NODE_JOIN, REQUEST_INFO, ENTITIES_NAMES, NODE_DISCOVERY, ORDER, PICKUP, TOKEN, PICK, print_out
+from utils import NODE_JOIN, REQUEST_INFO, ENTITIES_NAMES, NODE_DISCOVERY, ORDER, PICKUP, TOKEN, PICK, print_out, CAN_REQUEST, READY, NOT_READY
 
 class RingNode(threading.Thread):
    def __init__(self, address, id, name, max_nodes=4, ring_address=None, timeout=3):
@@ -135,10 +135,24 @@ class RingNode(threading.Thread):
                   self.successor_id = args['id']
                   self.successor_addr = args['addr']
 
-                  #self.logger.debug("Me: " + str(self.addr) + "\nSuccessor:" + str(self.successor_addr) + "\n")
+                  self.logger.debug("Me: " + str(self.addr) + "\nSuccessor:" + str(self.successor_addr) + "\n")
 
             elif message_received['method'] == NODE_DISCOVERY:
                self.discoveryReply(message_received['args'])
+            elif message_received['method'] == CAN_REQUEST:
+               if token_sent:
+                  message_to_send= {
+                     'type' : READY
+                  }
+                  self.send(addr,message_to_send)
+               else:
+                  message_to_send= {
+                     'type' : NOT_READY
+                  }
+                  self.send(addr,message_to_send)
+
+
+
             elif message_received['method'] == ORDER:
                
                message_received_copy = copy.deepcopy(message_received)

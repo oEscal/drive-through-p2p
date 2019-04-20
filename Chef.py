@@ -6,7 +6,7 @@ import queue
 import copy
 from RingNode import RingNode
 from food import Hamburger, Chips, Drink
-from utils import REQUEST_GRILL, REQUEST_FRIDGE, REQUEST_FRYER, ACKNOWLEDGE, RETURN_EQ, NEW_ORDER, FOOD_DONE, print_out
+from utils import REQUEST_GRILL, REQUEST_FRIDGE, REQUEST_FRYER, ACKNOWLEDGE, RETURN_EQ, NEW_ORDER, FOOD_DONE, print_out, print_equipment_requests
 
 logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
@@ -37,15 +37,16 @@ class Chef(threading.Thread):
          return REQUEST_FRYER
       return None
 
+
    def requests(self, order): #chef do request to the restaurant to equipment usage
       equipments_to_request = []
+      
       for food in order:
          equipments_to_request.append(self.choose_request(food))
-
       # send all equipments needed to cook the client's order
       if len(equipments_to_request) > 0:
          self.node.sendMessageToToken(self.node.entities['Restaurant'], equipments_to_request)
-         logger.debug("Requesting %s", equipments_to_request)
+         logger.debug("Requesting %s", print_equipment_requests(equipments_to_request))
 
    def cook(self, equipment, food): #cooking function,after the necessary ack
       equipment.cook(food.number)

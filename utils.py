@@ -8,11 +8,14 @@ TOKEN = 5
 TICKET = 6
 KEEP_ALIVE = 7
 IM_ALIVE = 8
+CAN_REQUEST = 9
+READY = 10
+NOT_READY = 11
 
 # request equipment
-REQUEST_GRILL = 0
-REQUEST_FRIDGE = 1
-REQUEST_FRYER = 2
+REQUEST_GRILL = 12
+REQUEST_FRIDGE = 13
+REQUEST_FRYER = 14
 
 # message type to contact with the entities
 NEW_ORDER = 0
@@ -38,10 +41,18 @@ FRIDGE_STD = 0.5
 FRYER_MEAN = 5
 FRYER_STD = 0.5
 
-
-def print_out(input):
+#this 2 functions below, were made due to print facility, to cleary see what´s its happening
+def print_out(request_input):
    string_order = ""
-   for i in range(len(input)-1):
-      string_order += str(input[i]) + ","
-   string_order += str(input[len(input)-1])
+   for i in range(len(request_input)-1):
+      string_order += str(request_input[i]) + ","
+   string_order += str(request_input[len(request_input)-1])
    return string_order
+
+def print_equipment_requests(array):
+   equipments_to_request_string = ""
+   for i in range(len(array)-1):
+      equipments_to_request_string += ''.join([name for name in globals() if globals()[name] is array[i]]) + ","
+   equipments_to_request_string += ''.join([name for name in globals() if globals()[name] is array[len(array)-1]])
+   return equipments_to_request_string
+#
