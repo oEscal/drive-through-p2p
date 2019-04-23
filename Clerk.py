@@ -4,6 +4,7 @@ import logging
 import threading
 import queue
 import copy
+import time
 from RingNode import RingNode
 from utils import FOOD_DONE, PICK, print_out
 
@@ -22,16 +23,32 @@ class Clerk(threading.Thread):
       self.name = self.__class__.__name__
       self.node = RingNode(('127.0.0.' + str(1 + self.id), 5000), self.id, self.name)
 
-      self.food_done = queue.Queue()
+      self.food_cold_timeout = 10
+      self.food_done = {}
+      #self.food_done = queue.Queue()
       self.pickups = []
-      
-   def set_order(self, food):    #forward the food order to its customer
+
+   
+   def class_into_dict(self,food):
+      food_dict = {}
+      for i in food:
+         food_dict[i.name] = i.number
+      return food_dict
+
+
+   def set_order(self):    #forward the food order to its customer
       for client_id in self.pickups:
-         if client_id == food['ticket']:
-            logger.debug("Given food %s to %s", print_out(food['food']), str(client_id))
-            self.node.send(food['client_address'], {'type': 'GIVEN', 'args': food['food']})
-            self.food_done.get()    # to remove the given food
+         if client_id in self.food_done:
+            logger.debug("Given food %s to %s", print_out(self.food_done[client_id][1]), str(client_id))
+            self.node.send(self.food_done[client_id][0], {'type': 'GIVEN', 'args': self.class_into_dict(self.food_done[client_id][1])})
+            self.food_done.pop(client_id)   # to remove the given food
             self.pickups.remove(client_id)   # remove client_id picked
+
+   def check_food_state(self): #tests whether the food remains hot using a timeoout variable(defined above ->self.food_cold_timeout)
+      food_done_copy = copy.deepcopy(self.food_done)
+      for key in food_done_copy:
+         if time.time() -  self.food_done[key][-1] > self.food_cold_timeout:
+            self.food_done.pop(key)
    
    def run(self):
       self.node.start()
@@ -40,18 +57,22 @@ class Clerk(threading.Thread):
          request = self.node.in_queue.get()
          
         
-
-
          if request['type']  == FOOD_DONE:   #add ready food orders in a queue
              message_received_copy = copy.deepcopy(request)
              message_received_copy['value']['food'] = print_out(message_received_copy['value']['food'])
 
 
              logger.debug("Food done %s", str(message_received_copy))
-             self.food_done.put(request['value'])
+
+             self.food_done[request['value']['ticket']] = (request['value']['client_address'],request['value']['food'] ,time.time())
+
+
          elif request['type'] == PICK: #add customers ready for payment in a list
              logger.debug("Pickup request %s",request['value'])
              self.pickups.append(request['value'])
 
-         if len(self.pickups) > 0 and not self.food_done.empty():
-             self.set_order(self.food_done.queue[0])
+         if len(self.pickups) > 0 and len(self.food_done) > 0:
+             self.set_order()
+
+         if len(self.food_done)  > 0:
+            self.check_food_state()

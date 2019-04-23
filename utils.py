@@ -1,9 +1,9 @@
+from food import Hamburger, Drink, Chips
+
 # messages's methods
 NODE_JOIN = 0
 REQUEST_INFO = 1
 NODE_DISCOVERY = 2
-ORDER = 3
-PICKUP = 4
 TOKEN = 5
 TICKET = 6
 KEEP_ALIVE = 7
@@ -33,13 +33,23 @@ ENTITIES_NAMES = [
    'Waiter'
 ]
 
-# equipment variables
-GRILL_MEAN = 3
-GRILL_STD = 0.5
-FRIDGE_MEAN = 1
-FRIDGE_STD = 0.5
-FRYER_MEAN = 5
-FRYER_STD = 0.5
+
+
+def choose_food_class(food_dict):
+   food_class_list = []
+
+   for food in food_dict:
+      if food == 'hamburger':
+         food_class_list.append(Hamburger(food_dict[food]))
+      elif food == 'fries':
+         food_class_list.append(Chips(food_dict[food]))
+      elif food == 'drink':
+         food_class_list.append(Drink(food_dict[food]))
+
+   
+   return food_class_list
+
+
 
 #this 2 functions below, were made due to print facility, to cleary see what´s its happening
 def print_out(request_input):
