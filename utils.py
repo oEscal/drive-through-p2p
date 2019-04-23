@@ -55,4 +55,3 @@ def print_equipment_requests(array):
       equipments_to_request_string += ''.join([name for name in globals() if globals()[name] is array[i]]) + ","
    equipments_to_request_string += ''.join([name for name in globals() if globals()[name] is array[len(array)-1]])
    return equipments_to_request_string
-#

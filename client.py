@@ -18,7 +18,7 @@ logging.basicConfig(level=logging.DEBUG,
 
 def main(port, ring, timeout):
    # Create a logger for the client
-   logger = logging.getLogger('Client')
+   logger = logging.getLogger('Client on port: ' + str(port))
 
    # UDP Socket
    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -36,7 +36,7 @@ def main(port, ring, timeout):
       p = pickle.dumps({
                'method': CAN_REQUEST,
             })
-      sock.sendto(p,ring)
+      sock.sendto(p, ring)
 
       p, addr = sock.recvfrom(1024)
       o = pickle.loads(p)
@@ -45,7 +45,7 @@ def main(port, ring, timeout):
          logger.debug("Ring Ready!!")
          break
       logger.debug("Ring not ready!!")
-      logger.debug("Wait for %f seconds",delta)
+      logger.debug("Wait for %f seconds", delta)
       time.sleep(delta)
 
    # Request some food
@@ -58,7 +58,8 @@ def main(port, ring, timeout):
          Chips(random.randint(0, 5))
       ]}
    })
-   logger.debug("Requesting %s",print_out(pickle.loads(p)['args']['food']))
+
+   logger.debug("Requesting %s", print_out(pickle.loads(p)['args']['food']))
    sock.sendto(p, ring)
 
    # Wait for Ticket
