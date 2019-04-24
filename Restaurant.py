@@ -7,6 +7,7 @@ import copy
 from RingNode import RingNode
 from kitchen_equipments import Grill, Fryer, Fridge
 from utils import REQUEST_GRILL, REQUEST_FRIDGE, REQUEST_FRYER, ACKNOWLEDGE, print_out
+from message_encapsulation import entities_message
 
 
 logging.basicConfig(level=logging.DEBUG,
@@ -66,10 +67,9 @@ class Restaurant(threading.Thread):
                current_index += 1
                current_index %= len(request)
 
-            message_to_send = {
-               'type': ACKNOWLEDGE,
-               'value': eq
-            }
+            message_to_send = entities_message.copy()
+            message_to_send['type'] = ACKNOWLEDGE
+            message_to_send['value'] = eq
 
             self.node.sendMessageToToken(self.node.entities['Chef'], message_to_send)
             logger.debug("Equipment sent: " + str(eq))

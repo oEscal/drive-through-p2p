@@ -6,7 +6,9 @@ import queue
 import copy
 from RingNode import RingNode
 from food import Hamburger, Chips, Drink
-from utils import REQUEST_GRILL, REQUEST_FRIDGE, REQUEST_FRYER, ACKNOWLEDGE, RETURN_EQ, NEW_ORDER, FOOD_DONE, print_out
+from utils import REQUEST_GRILL, REQUEST_FRIDGE, REQUEST_FRYER, ACKNOWLEDGE, RETURN_EQ, \
+   NEW_ORDER, FOOD_DONE, print_out
+from message_encapsulation import entities_message
 
 logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
@@ -74,15 +76,15 @@ class Chef(threading.Thread):
                current_food_equipment_class = self.last_order[i].equipment_required_to_cook.__class__
 
                if current_food_equipment_class == equipment_received_class:
-                  #recieve the ACK from restaurant and then cooks the food
+                  # receive the ACK from restaurant and then cooks the food
                   self.cook(orders['value'], self.last_order[i])
                   self.last_order.pop(i)
 
                   # return the equipment to the restaurant
-                  message_to_send = {
-                     'type': RETURN_EQ,
-                     'value': orders['value']
-                  }
+                  message_to_send = entities_message.copy()
+                  message_to_send['type'] = RETURN_EQ
+                  message_to_send['value'] = orders['value']
+
                   self.node.sendMessageToToken(self.node.entities['Restaurant'], message_to_send)
 
                   self.requests(self.last_order)
@@ -90,11 +92,10 @@ class Chef(threading.Thread):
 
          if self.last_order is not None and len(self.last_order) == 0:
             # inform the clerk that the food is done
-            message_to_send = {
-               'type': FOOD_DONE,
-               'value': self.order_to_client
-            }
-            
+            message_to_send = entities_message.copy()
+            message_to_send['type'] = FOOD_DONE
+            message_to_send['value'] = self.order_to_client
+
             message_received_copy = copy.deepcopy(message_to_send)
             message_received_copy['value']['food'] = print_out(message_received_copy['value']['food'])
 

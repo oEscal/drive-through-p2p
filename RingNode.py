@@ -10,7 +10,7 @@ import copy
 from utils import NODE_JOIN, REQUEST_INFO, ENTITIES_NAMES, NODE_DISCOVERY, ORDER, PICKUP, \
    TOKEN, PICK, GIVE_FOOD, print_out
 from adaptor import Adaptor
-from message_encapsulation import nodes_message, token_message, pre_ring_message
+from message_encapsulation import nodes_message, token_message, pre_ring_message, discovery_message
 
 class RingNode(threading.Thread):
    def __init__(self, address, self_id, name, max_nodes=4, ring_address=None, timeout=3):
@@ -111,14 +111,12 @@ class RingNode(threading.Thread):
 
       self.out_queue.put(message_to_send)
 
-   def sendToClient(self, addr, food):
+   def sendToClient(self, addr, method, args):
       message_to_send = nodes_message.copy()
-      message_to_send['method'] = GIVE_FOOD
-      message_to_send['args'] = food
+      message_to_send['method'] = method
+      message_to_send['args'] = args
 
       self.send(addr, self.adaptor.adapt(message_to_send, addr))
-
-
 
    def run(self):
       self.socket.bind(self.addr)
@@ -206,11 +204,14 @@ class RingNode(threading.Thread):
 
          if self.coordinator and self.inside_ring and len(self.nodes_com) == self.max_nodes:
             if not self.allNodesDiscovered():
-               for i in self.entities:
-                  if self.entities[i] is None:
+               for entity in self.entities:
+                  if self.entities[entity] is None:
+                     message_to_discover = discovery_message.copy()
+                     message_to_discover['name'] = entity
+
                      message_to_send = nodes_message.copy()
                      message_to_send['method'] = NODE_DISCOVERY
-                     message_to_send['args'] = {'name': i, 'id': None}
+                     message_to_send['args'] = message_to_discover
 
                      self.send(self.successor_addr, message_to_send)
             elif not token_sent:

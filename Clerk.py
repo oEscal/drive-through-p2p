@@ -36,7 +36,7 @@ class Clerk(threading.Thread):
          if client_id in self.food_done:
             logger.debug("Given food %s to %s", print_out(self.food_done[client_id][1]), str(client_id))
 
-            self.node.sendToClient(self.food_done[client_id][0], self.food_done[client_id][1])
+            self.node.sendToClient(self.food_done[client_id][0], GIVE_FOOD, self.food_done[client_id][1])
 
             print(self.food_done[client_id][1])
             print(self.class_into_dict(self.food_done[client_id][1]))

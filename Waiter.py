@@ -7,6 +7,7 @@ import logging
 import threading
 from RingNode import RingNode
 from utils import NEW_ORDER, TICKET, print_out
+from message_encapsulation import entities_message, waiter_to_chef_message
 
 logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
@@ -46,23 +47,18 @@ class Waiter(threading.Thread):
             ticket = uuid.uuid1()
 
             # send request to chef
-            message_to_send = {
-               'type': NEW_ORDER,
-               'value': {
-                  'client_address': orders['address'],
-                  'ticket': ticket,
-                  'food': order_to_cooker
-               }
-            }
+            message_to_chef = waiter_to_chef_message.copy()
+            message_to_chef['client_address'] = orders['address']
+            message_to_chef['ticket'] = ticket
+            message_to_chef['food'] = order_to_cooker
+
+            message_to_send = entities_message.copy()
+            message_to_send['type'] = NEW_ORDER
+            message_to_send['value'] = message_to_chef
 
             self.node.sendMessageToToken(self.node.entities['Chef'], message_to_send)
             logger.debug("Chef order sent: " + print_out(order_to_cooker))
 
 
             # send the ticket to the client
-            message_to_send = {
-               'type': TICKET,
-               'args': ticket
-            }
-            self.node.send(orders['address'], message_to_send)
-
+            self.node.sendToClient(orders['address'], TICKET, ticket)
