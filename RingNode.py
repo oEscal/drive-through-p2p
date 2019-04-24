@@ -7,13 +7,15 @@ import logging
 import pickle
 import queue
 import copy
-from utils import NODE_JOIN, REQUEST_INFO, ENTITIES_NAMES, NODE_DISCOVERY, ORDER, PICKUP, TOKEN, PICK, print_out
-from adaptor import adaptor
+from utils import NODE_JOIN, REQUEST_INFO, ENTITIES_NAMES, NODE_DISCOVERY, ORDER, PICKUP, \
+   TOKEN, PICK, GIVE_FOOD, print_out
+from adaptor import Adaptor
+from message_encapsulation import nodes_message, token_message, pre_ring_message
 
 class RingNode(threading.Thread):
-   def __init__(self, address, id, name, max_nodes=4, ring_address=None, timeout=3):
+   def __init__(self, address, self_id, name, max_nodes=4, ring_address=None, timeout=3):
       threading.Thread.__init__(self)
-      self.id = id
+      self.id = self_id
       self.addr = address
       self.ring_address = ring_address
       self.max_nodes = max_nodes
@@ -41,6 +43,9 @@ class RingNode(threading.Thread):
       self.socket.settimeout(timeout)
       self.logger = logging.getLogger("Node {}".format(self.id))
 
+      # adaptor for professor's client
+      self.adaptor = Adaptor()
+
    def send(self, address, o):
       p = pickle.dumps(o)
       self.socket.sendto(p, address)
@@ -61,18 +66,23 @@ class RingNode(threading.Thread):
          address_send = ('127.0.0.' + str(i + 1), 5000)
          self.send(address_send, message_to_send)
 
-   def requestJoin(self):
-      # send info about me to other nodes
-      message_to_send = {'method': NODE_JOIN, 'args': {'addr': self.addr, 'id': self.id}}
-      self.broadcast(message_to_send)
-
    def requestInfo(self):
-      # request info about other nodes (because they can already be in a ring and this is to accelarate the process of enter the ring)
-      message_to_send = {'method': REQUEST_INFO, 'args': {'addr': self.addr, 'id': self.id}}
+      # request info about other nodes (because they can already be in a ring and this is to accelarate the process
+      # of enter the ring)
+      message_pre_ring = pre_ring_message.copy()
+      message_pre_ring['addr'] = self.addr
+      message_pre_ring['id'] = self.id
+
+      message_to_send = nodes_message.copy()
+      message_to_send['method'] = REQUEST_INFO
+      message_to_send['args'] = message_pre_ring
+
       self.broadcast(message_to_send)
 
    def discoveryReply(self, args):
-      message_to_send = {'method': NODE_DISCOVERY, 'args': args.copy()}
+      message_to_send = nodes_message.copy()
+      message_to_send['method'] = NODE_DISCOVERY
+      message_to_send['args'] = args.copy()
 
       if self.name == args['name'] and args['id'] is None:
          message_to_send['args']['id'] = self.id
@@ -90,15 +100,25 @@ class RingNode(threading.Thread):
             number_nodes += 1
       return number_nodes == self.max_nodes
 
-   def sendMessageToToken(self, id, order):
-      message_to_send = {
-         'method': TOKEN,
-         'args': {
-            'id': id,
-            'order': order
-         }
-      }
+   def sendMessageToToken(self, id_to_send, order):
+      token_to_send = token_message.copy()
+      token_to_send['id'] = id_to_send
+      token_to_send['order'] = order
+
+      message_to_send = nodes_message.copy()
+      message_to_send['method'] = TOKEN
+      message_to_send['args'] = token_to_send
+
       self.out_queue.put(message_to_send)
+
+   def sendToClient(self, addr, food):
+      message_to_send = nodes_message.copy()
+      message_to_send['method'] = GIVE_FOOD
+      message_to_send['args'] = food
+
+      self.send(addr, self.adaptor.adapt(message_to_send, addr))
+
+
 
    def run(self):
       self.socket.bind(self.addr)
@@ -109,10 +129,17 @@ class RingNode(threading.Thread):
       while True:
          p, addr = self.recv()
          if p is not None:
-            message_received = adaptor(pickle.loads(p), addr)
+            message_received = self.adaptor.adapt(pickle.loads(p), addr)
 
             if message_received['method'] == REQUEST_INFO:
-               message_to_send = {'method': NODE_JOIN, 'args': {'addr': self.addr, 'id': self.id}}
+               message_pre_ring = pre_ring_message.copy()
+               message_pre_ring['addr'] = self.addr
+               message_pre_ring['id'] = self.id
+
+               message_to_send = nodes_message.copy()
+               message_to_send['method'] = NODE_JOIN
+               message_to_send['args'] = message_pre_ring
+
                self.send(message_received['args']['addr'], message_to_send)
             elif message_received['method'] == NODE_JOIN:
                args = message_received['args']
@@ -136,7 +163,7 @@ class RingNode(threading.Thread):
                   self.successor_id = args['id']
                   self.successor_addr = args['addr']
 
-                  #self.logger.debug("Me: " + str(self.addr) + "\nSuccessor:" + str(self.successor_addr) + "\n")
+                  # self.logger.debug("Me: " + str(self.addr) + "\nSuccessor:" + str(self.successor_addr) + "\n")
 
             elif message_received['method'] == NODE_DISCOVERY:
                self.discoveryReply(message_received['args'])
@@ -161,13 +188,10 @@ class RingNode(threading.Thread):
 
                if id_destination == self.id:
                   self.in_queue.put(message_received['args']['order'])
-                  message_to_send = {
-                     'method': TOKEN,
-                     'args': {
-                        'id': None,
-                        'order': None
-                     }
-                  }
+
+                  message_to_send = nodes_message.copy()
+                  message_to_send['method'] = TOKEN
+                  message_to_send['args'] = token_message.copy()
 
                if self.out_queue.qsize() > 0 and (id_destination == self.id
                   or id_destination is None):
@@ -184,16 +208,16 @@ class RingNode(threading.Thread):
             if not self.allNodesDiscovered():
                for i in self.entities:
                   if self.entities[i] is None:
-                     message_to_send = {'method': NODE_DISCOVERY, 'args': {'name': i, 'id': None}}
+                     message_to_send = nodes_message.copy()
+                     message_to_send['method'] = NODE_DISCOVERY
+                     message_to_send['args'] = {'name': i, 'id': None}
+
                      self.send(self.successor_addr, message_to_send)
             elif not token_sent:
-               message_to_send = {
-                  'method': TOKEN,
-                  'args': {
-                     'id': None,
-                     'order': None
-                  }
-               }
+               message_to_send = nodes_message.copy()
+               message_to_send['method'] = TOKEN
+               message_to_send['args'] = token_message
+
                self.send(self.successor_addr, message_to_send)
                token_sent = True
                self.logger.debug("TOKEN SENT BEFORE %s SECONDS!", str(time.time() - delta_time))

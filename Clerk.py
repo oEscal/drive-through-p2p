@@ -2,7 +2,6 @@
 
 import logging
 import threading
-import queue
 import copy
 import time
 from RingNode import RingNode
@@ -25,7 +24,6 @@ class Clerk(threading.Thread):
 
       self.food_cold_timeout = 10
       self.food_done = {}
-      # self.food_done = queue.Queue()
       self.pickups = []
 
    def class_into_dict(self, food):
@@ -38,11 +36,10 @@ class Clerk(threading.Thread):
       for client_id in self.pickups:
          if client_id in self.food_done:
             logger.debug("Given food %s to %s", print_out(self.food_done[client_id][1]), str(client_id))
-            self.node.send(self.food_done[client_id][0],
-                           {
-                              'type': GIVE_FOOD,
-                              'args': self.class_into_dict(self.food_done[client_id][1])
-                           })
+
+            self.node.sendToClient(self.food_done[client_id][0], self.food_done[client_id][1])
+
+            print(self.food_done[client_id][1])
             print(self.class_into_dict(self.food_done[client_id][1]))
             self.food_done.pop(client_id)  # to remove the given food
             self.pickups.remove(client_id)  # remove client_id picked
