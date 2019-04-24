@@ -1,13 +1,7 @@
 import time
 import random
+from utils import GRILL_MEAN, GRILL_STD, FRIDGE_MEAN, FRIDGE_STD, FRYER_MEAN, FRYER_STD
 
-# equipment variables
-GRILL_MEAN = 3
-GRILL_STD = 0.5
-FRIDGE_MEAN = 1
-FRIDGE_STD = 0.5
-FRYER_MEAN = 5
-FRYER_STD = 0.5
 class KitchenEquipment:
    def __init__(self, mean, std):
       self.mean = mean

@@ -7,7 +7,8 @@ import logging
 import pickle
 import queue
 import copy
-from utils import NODE_JOIN, REQUEST_INFO, ENTITIES_NAMES, NODE_DISCOVERY, TOKEN, PICK, print_out, CAN_REQUEST, READY, NOT_READY, choose_food_class
+from utils import NODE_JOIN, REQUEST_INFO, ENTITIES_NAMES, NODE_DISCOVERY, ORDER, PICKUP, TOKEN, PICK, print_out
+from adaptor import adaptor
 
 class RingNode(threading.Thread):
    def __init__(self, address, id, name, max_nodes=4, ring_address=None, timeout=3):
@@ -108,7 +109,7 @@ class RingNode(threading.Thread):
       while True:
          p, addr = self.recv()
          if p is not None:
-            message_received = pickle.loads(p)
+            message_received = adaptor(pickle.loads(p), addr)
 
             if message_received['method'] == REQUEST_INFO:
                message_to_send = {'method': NODE_JOIN, 'args': {'addr': self.addr, 'id': self.id}}
@@ -135,34 +136,18 @@ class RingNode(threading.Thread):
                   self.successor_id = args['id']
                   self.successor_addr = args['addr']
 
-                  self.logger.debug("Me: " + str(self.addr) + "\nSuccessor:" + str(self.successor_addr) + "\n")
+                  #self.logger.debug("Me: " + str(self.addr) + "\nSuccessor:" + str(self.successor_addr) + "\n")
 
             elif message_received['method'] == NODE_DISCOVERY:
                self.discoveryReply(message_received['args'])
-            elif message_received['method'] == CAN_REQUEST:
-               if token_sent:
-                  message_to_send= {
-                     'type' : READY
-                  }
-                  self.send(addr,message_to_send)
-               else:
-                  message_to_send= {
-                     'type' : NOT_READY
-                  }
-                  self.send(addr,message_to_send)
+            elif message_received['method'] == ORDER:
+               
+               message_received_copy = copy.deepcopy(message_received)
+               message_received_copy['args']['food'] = print_out(message_received_copy['args']['food'])
 
-            elif message_received['method'] == 'ORDER':
-               print(addr)
-               message_to_send = {
-                  'address' : addr ,
-                  'food' :choose_food_class(message_received['args'])
-               }
-               self.logger.debug("Message received from client: " + str(message_received))
-               self.sendMessageToToken(self.entities['Waiter'], message_to_send)
-
-
-
-            elif message_received['method'] == 'PICKUP':
+               self.logger.debug("Message received from client: " + str(message_received_copy))
+               self.sendMessageToToken(self.entities['Waiter'], message_received['args'])
+            elif message_received['method'] == PICKUP:
                self.logger.debug("Message received from client: " + str(message_received))
 
                message_to_send = {
@@ -170,8 +155,6 @@ class RingNode(threading.Thread):
                   'value': message_received['args']
                }
                self.sendMessageToToken(self.entities['Clerk'], message_to_send)
-
-
             elif message_received['method'] == TOKEN:
                id_destination = message_received['args']['id']
                message_to_send = message_received

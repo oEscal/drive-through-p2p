@@ -22,7 +22,7 @@ class Drink(Food):
       super().__init__("drink", number, Fridge())
 
 class Chips(Food):
-   name = "fries"
+   name = "chips"
 
    def __init__(self, number):
-      super().__init__("fries", number, Fryer())
+      super().__init__("chips", number, Fryer())

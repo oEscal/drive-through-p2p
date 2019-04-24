@@ -6,7 +6,7 @@ import socket
 import random
 import logging
 import argparse
-from utils import ORDER, PICKUP, print_out, CAN_REQUEST, NOT_READY, READY
+from utils import ORDER, PICKUP, print_out
 from food import Hamburger, Drink, Chips
 
 
@@ -14,11 +14,10 @@ logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
                     datefmt='%m-%d %H:%M:%S')
 
-   
 
 def main(port, ring, timeout):
    # Create a logger for the client
-   logger = logging.getLogger('Client on port: ' + str(port))
+   logger = logging.getLogger('Client')
 
    # UDP Socket
    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -30,24 +29,6 @@ def main(port, ring, timeout):
    logger.info('Wait for %f seconds', delta)
    time.sleep(delta)
 
-
-   #check if its possible to do requests
-   while True:
-      p = pickle.dumps({
-               'method': CAN_REQUEST,
-            })
-      sock.sendto(p, ring)
-
-      p, addr = sock.recvfrom(1024)
-      o = pickle.loads(p)
-
-      if o['type'] == READY:
-         logger.debug("Ring Ready!!")
-         break
-      logger.debug("Ring not ready!!")
-      logger.debug("Wait for %f seconds", delta)
-      time.sleep(delta)
-
    # Request some food
    logger.info('Request some food...')
    p = pickle.dumps({
@@ -58,7 +39,7 @@ def main(port, ring, timeout):
          Chips(random.randint(0, 5))
       ]}
    })
-
+   
    logger.debug("Requesting %s", print_out(pickle.loads(p)['args']['food']))
    sock.sendto(p, ring)
 
@@ -75,7 +56,7 @@ def main(port, ring, timeout):
    # Wait for order
    p, addr = sock.recvfrom(1024)
    o = pickle.loads(p)
-   logger.info('Got order %s',print_out(o['args']))
+   logger.info('Got order %s', print_out(o['args']))
 
    # Close socket
    sock.close()
