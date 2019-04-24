@@ -16,10 +16,9 @@ logger = logging.getLogger('Restaurant')
 
 
 class Restaurant(threading.Thread):
-   def __init__(self, number_grills=1, number_fryers=1, number_fridges=1, port=5000, ide=0):
+   def __init__(self, number_grills=1, number_fryers=1, number_fridges=1, ide=0):
       threading.Thread.__init__(self)
       self.id = ide
-      self.port = port
 
       self.name = self.__class__.__name__
       self.node = RingNode(('127.0.0.' + str(1 + self.id), 5000), self.id, self.name)

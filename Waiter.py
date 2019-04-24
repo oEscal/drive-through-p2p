@@ -15,10 +15,9 @@ logger = logging.getLogger('Waiter')
 
 
 class Waiter(threading.Thread):
-   def __init__(self, port=5001, ide=1):
+   def __init__(self, ide=1):
       threading.Thread.__init__(self)
       self.id = ide
-      self.port = port
 
       self.mean = 2
       self.std = 0.5
