@@ -8,11 +8,14 @@ import logging
 import argparse
 from utils import ORDER, PICKUP, print_out
 from food import Hamburger, Drink, Chips
-
-
-logging.basicConfig(level=logging.DEBUG,
+logging.basicConfig(filename="test_100_clients.txt",filemode='a'
+                     level=logging.DEBUG,
                     format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
                     datefmt='%m-%d %H:%M:%S')
+
+#logging.basicConfig(level=logging.DEBUG,
+#                    format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
+#                    datefmt='%m-%d %H:%M:%S')
 
 
 def main(port, ring, timeout):
