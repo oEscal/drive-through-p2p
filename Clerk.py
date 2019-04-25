@@ -4,7 +4,7 @@ import logging
 import threading
 import copy
 import time
-from RingNode import RingNode
+from RingNode_v2 import RingNode
 from utils import FOOD_DONE, PICKUP, GIVE_FOOD, print_out
 
 logging.basicConfig(level=logging.DEBUG,

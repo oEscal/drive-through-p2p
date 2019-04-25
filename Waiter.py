@@ -5,7 +5,7 @@ import uuid
 import time
 import logging
 import threading
-from RingNode import RingNode
+from RingNode_v2 import RingNode
 from utils import NEW_ORDER, TICKET, print_out
 from message_encapsulation import entities_message, waiter_to_chef_message
 

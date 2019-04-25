@@ -15,7 +15,7 @@ from encapsulation_utils import nodes_message_create, token_message_create, \
 
 
 class RingNode(threading.Thread):
-   def __init__(self, address, self_id, name, max_nodes=4, ring_address=None, timeout=3, refresh_time=3):
+   def __init__(self, address, self_id, name, max_nodes=4, ring_address=None, timeout=3):
       threading.Thread.__init__(self)
       self.id = self_id
       self.addr = address
@@ -27,8 +27,6 @@ class RingNode(threading.Thread):
       self.successor_addr = self.addr
       self.nodes_com = []
       self.name = name
-
-      self.refresh_time = refresh_time
 
       self.entities = {}
       for i in range(len(ENTITIES_NAMES)):
@@ -116,8 +114,10 @@ class RingNode(threading.Thread):
       delta_time = time.time()
       token_sent = False
 
-      request_info_time = time.time()
       while True:
+         if not self.inside_ring:
+            self.requestInfo()
+
          p, addr = self.recv()
          if p is not None:
             message_received = self.adaptor.adapt(pickle.loads(p), addr)
@@ -153,7 +153,7 @@ class RingNode(threading.Thread):
                   self.successor_id = args['id']
                   self.successor_addr = args['addr']
 
-                  self.logger.debug("Me: " + str(self.addr) + "\nSuccessor:" + str(self.successor_addr) + "\n")
+                  # self.logger.debug("Me: " + str(self.addr) + "\nSuccessor:" + str(self.successor_addr) + "\n")
 
             elif message_received['method'] == NODE_DISCOVERY:
                self.discoveryReply(message_received['args'])
@@ -188,10 +188,6 @@ class RingNode(threading.Thread):
                self.send(self.successor_addr, message_to_send)
             else:
                self.send(self.successor_addr, message_received)
-
-         if not self.inside_ring or (time.time() - request_info_time) > self.refresh_time:
-            self.requestInfo()
-            request_info_time = time.time()
 
          if self.coordinator and self.inside_ring and len(self.nodes_com) == self.max_nodes:
             if not self.allNodesDiscovered():

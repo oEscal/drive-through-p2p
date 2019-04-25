@@ -8,7 +8,7 @@ import pickle
 import queue
 import copy
 from utils import NODE_JOIN, REQUEST_INFO, ENTITIES_NAMES, NODE_DISCOVERY, ORDER, PICKUP, \
-   TOKEN, PICK, GIVE_FOOD, KEEP_ALIVE, IM_ALIVE, print_out
+   TOKEN, PICK, GIVE_FOOD, KEEP_ALIVE, IM_ALIVE, CLEAR_TABLE, print_out
 from adaptor import Adaptor
 from encapsulation_utils import nodes_message_create, token_message_create, \
    pre_ring_message_create, discovery_message_create
@@ -86,7 +86,7 @@ class RingNode(threading.Thread):
          message_to_send['args']['id'] = self.id
       elif args['id'] is not None:
          self.entities[args['name']] = args['id']
-         self.logger.debug('My table of entities: ' + str(self.entities))
+         # self.logger.debug('My table of entities: ' + str(self.entities))
 
       if args['id'] != self.id:
          self.send(self.successor_addr, message_to_send)
@@ -119,6 +119,9 @@ class RingNode(threading.Thread):
       token_sent = False
 
       while True:
+         if not self.inside_ring:
+            self.requestInfo()
+
          p, addr = self.recv()
          if p is not None:
             message_received = self.adaptor.adapt(pickle.loads(p), addr)
@@ -134,11 +137,14 @@ class RingNode(threading.Thread):
 
                if args['id'] not in self.nodes_com:
                   self.nodes_com.append(args['id'])
+                  self.logger.debug("Nodes that i know about: " + str(self.nodes_com))
 
-               if args['id'] < self.id:
+               if self.coordinator and args['id'] < self.id:
                   self.coordinator = False
-               if self.id <= min(self.nodes_com):
+                  self.logger.debug("I'm not the coordinator!")
+               if not self.coordinator and self.id <= min(self.nodes_com):
                   self.coordinator = True
+                  self.logger.debug("I'm the coordinator!")
 
                if args['id'] > self.successor_id and self.successor_id < self.id and len(self.nodes_com) > self.id + 1:
                   self.inside_ring = False
@@ -162,6 +168,9 @@ class RingNode(threading.Thread):
                self.send(addr, message_to_send)
             elif message_received['method'] == IM_ALIVE:
                time_since_last_alive = time.time()
+            elif message_received['method'] == CLEAR_TABLE:
+               self.entities = {k: None for k in self.entities}
+               self.logger.debug("Entities table cleared")
             elif message_received['method'] == NODE_DISCOVERY:
                self.discoveryReply(message_received['args'])
             elif message_received['method'] == NODE_DISCOVERY:
@@ -200,9 +209,6 @@ class RingNode(threading.Thread):
             else:
                self.send(self.successor_addr, message_received)
 
-         if not self.inside_ring:
-            self.requestInfo()
-
          if self.inside_ring and time.time() - im_alive_time > self.refresh_time:
             im_alive_time = time.time()
 
@@ -222,6 +228,9 @@ class RingNode(threading.Thread):
             self.successor_addr = self.addr
             token_sent = False
 
+            # inform the other nodes that the ring is not complete
+            message_to_send = nodes_message_create(CLEAR_TABLE, None)
+            self.broadcast(message_to_send)
 
          if self.coordinator and self.inside_ring and len(self.nodes_com) == self.max_nodes:
             if not self.allNodesDiscovered():

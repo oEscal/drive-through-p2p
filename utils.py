@@ -8,6 +8,7 @@ TOKEN = 5
 TICKET = 6
 KEEP_ALIVE = 7
 IM_ALIVE = 8
+CLEAR_TABLE = 9
 
 # request equipment
 REQUEST_GRILL = 0

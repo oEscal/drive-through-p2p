@@ -4,7 +4,7 @@ import logging
 import threading
 import queue
 import copy
-from RingNode import RingNode
+from RingNode_v2 import RingNode
 from kitchen_equipments import Grill, Fryer, Fridge
 from utils import REQUEST_GRILL, REQUEST_FRIDGE, REQUEST_FRYER, ACKNOWLEDGE, print_out
 from message_encapsulation import entities_message

@@ -4,7 +4,7 @@ import logging
 import threading
 import queue
 import copy
-from RingNode import RingNode
+from RingNode_v2 import RingNode
 from food import Hamburger, Chips, Drink
 from utils import REQUEST_GRILL, REQUEST_FRIDGE, REQUEST_FRYER, ACKNOWLEDGE, RETURN_EQ, \
    NEW_ORDER, FOOD_DONE, print_out
