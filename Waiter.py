@@ -33,7 +33,7 @@ class Waiter(threading.Thread):
          # receive a new client's order
          orders = self.node.in_queue.get()
          logger.debug("Received new order from client: " + print_out(orders['food']))
-
+         
          # verify if there are empty orders
          order_to_cooker = []
          for food in orders['food']:

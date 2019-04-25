@@ -1,35 +1,26 @@
 # Drive-Through Restaurant P2P
 
-## Prerequisites
 
-* Clone this repository
+## Como executar
+Abrir dois terminais:
 
-## How to run
-Open two terminals:
-
-restaurant:
+simulação:
 ```console
-$ python restaurant.py
+$ python3 simulation.py
 ```
-client:
+cliente:
 ```console
-$ python client.py
+$ python3 client.py
 ```
 
-## Git Upstream
 
-Keep your fork sync with the upstream
 
-```console
-$ git remote add upstream git@github.com:mariolpantunes/load-balancer.git
-$ git fetch upstream
-$ git checkout master
-$ git merge upstream/master
-```
 
 ## Authors
 
 * **Mário Antunes** - [mariolpantunes](https://github.com/mariolpantunes)
+* **Pedro Escaleira**
+* **Rafael Simões**
 
 ## License
 
