@@ -59,6 +59,5 @@ class Waiter(threading.Thread):
             self.node.sendMessageToToken(self.node.entities['Chef'], message_to_send)
             logger.debug("Chef order sent: " + print_out(order_to_cooker))
 
-
             # send the ticket to the client
             self.node.sendToClient(orders['address'], TICKET, ticket)
