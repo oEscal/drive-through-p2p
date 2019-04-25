@@ -15,7 +15,7 @@ from encapsulation_utils import nodes_message_create, token_message_create, \
 
 
 class RingNode(threading.Thread):
-   def __init__(self, address, self_id, name, max_nodes=4, ring_address=None, timeout=3):
+   def __init__(self, address, self_id, name, max_nodes=4, ring_address=None, timeout=3, refresh_time=3):
       threading.Thread.__init__(self)
       self.id = self_id
       self.addr = address
@@ -27,6 +27,8 @@ class RingNode(threading.Thread):
       self.successor_addr = self.addr
       self.nodes_com = []
       self.name = name
+
+      self.refresh_time = refresh_time
 
       self.entities = {}
       for i in range(len(ENTITIES_NAMES)):
@@ -114,6 +116,7 @@ class RingNode(threading.Thread):
       delta_time = time.time()
       token_sent = False
 
+      request_info_time = time.time()
       while True:
          p, addr = self.recv()
          if p is not None:
@@ -130,11 +133,14 @@ class RingNode(threading.Thread):
 
                if args['id'] not in self.nodes_com:
                   self.nodes_com.append(args['id'])
+                  self.logger.debug("Nodes that i know about: " + str(self.nodes_com))
 
-               if args['id'] < self.id:
+               if self.coordinator and args['id'] < self.id:
                   self.coordinator = False
-               if self.id <= min(self.nodes_com):
+                  self.logger.debug("I'm not the coordinator!")
+               if not self.coordinator and self.id <= min(self.nodes_com):
                   self.coordinator = True
+                  self.logger.debug("I'm the coordinator!")
 
                if args['id'] > self.successor_id and self.successor_id < self.id and len(self.nodes_com) > self.id + 1:
                   self.inside_ring = False
@@ -147,7 +153,7 @@ class RingNode(threading.Thread):
                   self.successor_id = args['id']
                   self.successor_addr = args['addr']
 
-                  # self.logger.debug("Me: " + str(self.addr) + "\nSuccessor:" + str(self.successor_addr) + "\n")
+                  self.logger.debug("Me: " + str(self.addr) + "\nSuccessor:" + str(self.successor_addr) + "\n")
 
             elif message_received['method'] == NODE_DISCOVERY:
                self.discoveryReply(message_received['args'])
@@ -183,8 +189,9 @@ class RingNode(threading.Thread):
             else:
                self.send(self.successor_addr, message_received)
 
-         if not self.inside_ring:
+         if not self.inside_ring or (time.time() - request_info_time) > self.refresh_time:
             self.requestInfo()
+            request_info_time = time.time()
 
          if self.coordinator and self.inside_ring and len(self.nodes_com) == self.max_nodes:
             if not self.allNodesDiscovered():

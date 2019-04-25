@@ -130,7 +130,6 @@ class RingNode(threading.Thread):
 
                self.send(message_received['args']['addr'], message_to_send)
             if message_received['method'] == NODE_JOIN or message_received['method'] == REQUEST_INFO:
-               print("OLA")
                args = message_received['args']
 
                if args['id'] not in self.nodes_com:
@@ -168,7 +167,6 @@ class RingNode(threading.Thread):
             elif message_received['method'] == NODE_DISCOVERY:
                self.discoveryReply(message_received['args'])
             elif message_received['method'] == ORDER:
-
                message_received_copy = copy.deepcopy(message_received)
                message_received_copy['args']['food'] = print_out(message_received_copy['args']['food'])
 
