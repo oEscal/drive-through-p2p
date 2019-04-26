@@ -1,3 +1,4 @@
+//output para 100 clientes, com base na versao 1 do ringNode
 04-26 16:53:41 Client 1     INFO     Wait for 1.364338 seconds
 04-26 16:53:41 Client 2     INFO     Wait for 2.382807 seconds
 04-26 16:53:41 Client 3     INFO     Wait for 2.322367 seconds
