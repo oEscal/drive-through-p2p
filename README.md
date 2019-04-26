@@ -1,26 +1,24 @@
 # Drive-Through Restaurant P2P
 
+## Várias possibilidades de execução
+### Execução normal dos scripts fornecidos pelos docentes
 
-## Execução dos testes
-
-### Execução normal com os scripts fornecidos pelos docentes
-
-simulação:
+- simulação:
 ```console
 $ python3 simulation.py
 ```
-cliente:
+- cliente:
 ```console
 $ python3 client.py
 ```
 
-cliente implementado pelo grupo:
+- cliente implementado pelo grupo:
 ```console
 $ python3 our_client.py
 ```
 
 ### Script bash para executar cada entidade de forma aleatória com um espaçamento temporal
-
+ - O intervalo em segundos é o intervalo entre o inicio de execução entre cada entidade
 ```console
 $ ./simulation_init.py <Interval in seconds>
 ```
@@ -40,7 +38,7 @@ $ ./simulation_v2_init.py 5 3
 ```
 
 
-### Script bash para executar vários clientes
+### Script bash para executar vários clientes ao mesmo tempo
 
 
 ```console
@@ -51,7 +49,7 @@ Usage:
 $ ./init.sh client.py 10
 ```
 
-### Script bash para intercalar duas versões da classe RingNode em toda a simulação
+### Script bash para mudar a versão do RingNode usada em cada entidade
 
 ```console
 $ ./switch_to_v2.sh <import file to substitute> <import file to add>
@@ -62,20 +60,8 @@ Usage:
 $ ./switch_to_v2.sh RingNode_v2 RingNode
 ```
 
-### Script bash para terminar toda a simulação
-
-```console
-$ ./kill_all_simulations.sh 
-```
-
-
 ## Authors
 
-* **Mário Antunes** - [mariolpantunes](https://github.com/mariolpantunes)
-* **Pedro Escaleira**
-* **Rafael Simões**
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
+* [**Mário Antunes**](https://github.com/mariolpantunes)
+* [**Pedro Escaleira**](https://github.com/oEscal)
+* [**Rafael Simões**](https://github.com/Rafaelyot)

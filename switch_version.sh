@@ -6,7 +6,8 @@ else
    for i in "${nodes[@]}"; do
       echo "Modified:" $i
       content=$(cat $i)
-      new_content=${content/$1/$2}
+
+      new_content=${content//"from $1 import RingNode"/"from $2 import RingNode"}
 
       printf "%s" "$new_content" > $i
    done
