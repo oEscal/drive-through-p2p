@@ -8,6 +8,12 @@ import logging
 import argparse
 from utils import ORDER, PICKUP, print_out
 from food import Hamburger, Drink, Chips
+
+#basicConfig to write the files
+#logging.basicConfig(filename='file_path',filemode='a',level=logging.DEBUG,
+#                    format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
+#                    datefmt='%m-%d %H:%M:%S')
+
 logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
                     datefmt='%m-%d %H:%M:%S')
