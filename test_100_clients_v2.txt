@@ -1,0 +1,500 @@
+04-26 17:31:55 Client 1     INFO     Wait for 2.205521 seconds
+04-26 17:31:55 Client 2     INFO     Wait for 2.497275 seconds
+04-26 17:31:55 Client 3     INFO     Wait for 1.919815 seconds
+04-26 17:31:55 Client 4     INFO     Wait for 2.192577 seconds
+04-26 17:31:55 Client 5     INFO     Wait for 1.724285 seconds
+04-26 17:31:55 Client 6     INFO     Wait for 2.276847 seconds
+04-26 17:31:55 Client 7     INFO     Wait for 2.687254 seconds
+04-26 17:31:56 Client 8     INFO     Wait for 1.983999 seconds
+04-26 17:31:56 Client 9     INFO     Wait for 2.433036 seconds
+04-26 17:31:56 Client 10    INFO     Wait for 1.644810 seconds
+04-26 17:31:56 Client 11    INFO     Wait for 0.910789 seconds
+04-26 17:31:56 Client 12    INFO     Wait for 2.141337 seconds
+04-26 17:31:56 Client 13    INFO     Wait for 1.667474 seconds
+04-26 17:31:56 Client 14    INFO     Wait for 2.111425 seconds
+04-26 17:31:57 Client 15    INFO     Wait for 1.750063 seconds
+04-26 17:31:57 Client 1     INFO     Request some food: {'hamburger': 1, 'fries': 2, 'drink': 0}
+04-26 17:31:57 Client 16    INFO     Wait for 1.196149 seconds
+04-26 17:31:57 Client 3     INFO     Request some food: {'hamburger': 1, 'fries': 2, 'drink': 2}
+04-26 17:31:57 Client 5     INFO     Request some food: {'hamburger': 0, 'fries': 1, 'drink': 0}
+04-26 17:31:57 Client 17    INFO     Wait for 0.409363 seconds
+04-26 17:31:57 Client 11    INFO     Request some food: {'hamburger': 1, 'fries': 2, 'drink': 1}
+04-26 17:31:57 Client 18    INFO     Wait for 0.890415 seconds
+04-26 17:31:57 Client 4     INFO     Request some food: {'hamburger': 2, 'fries': 1, 'drink': 2}
+04-26 17:31:57 Client 2     INFO     Request some food: {'hamburger': 1, 'fries': 2, 'drink': 0}
+04-26 17:31:57 Client 19    INFO     Wait for 1.827169 seconds
+04-26 17:31:57 Client 17    INFO     Request some food: {'hamburger': 1, 'fries': 0, 'drink': 0}
+04-26 17:31:57 Client 20    INFO     Wait for 2.340717 seconds
+04-26 17:31:57 Client 10    INFO     Request some food: {'hamburger': 1, 'fries': 0, 'drink': 0}
+04-26 17:31:58 Client 21    INFO     Wait for 1.475698 seconds
+04-26 17:31:58 Client 6     INFO     Request some food: {'hamburger': 2, 'fries': 1, 'drink': 0}
+04-26 17:31:58 Client 8     INFO     Request some food: {'hamburger': 1, 'fries': 3, 'drink': 1}
+04-26 17:31:58 Client 22    INFO     Wait for 2.719081 seconds
+04-26 17:31:58 Client 23    INFO     Wait for 2.330778 seconds
+04-26 17:31:58 Client 16    INFO     Request some food: {'hamburger': 2, 'fries': 0, 'drink': 1}
+04-26 17:31:58 Client 18    INFO     Request some food: {'hamburger': 0, 'fries': 0, 'drink': 2}
+04-26 17:31:58 Client 13    INFO     Request some food: {'hamburger': 0, 'fries': 0, 'drink': 1}
+04-26 17:31:58 Client 24    INFO     Wait for 1.470279 seconds
+04-26 17:31:58 Client 7     INFO     Request some food: {'hamburger': 1, 'fries': 0, 'drink': 0}
+04-26 17:31:58 Client 25    INFO     Wait for 1.963788 seconds
+04-26 17:31:58 Client 9     INFO     Request some food: {'hamburger': 0, 'fries': 0, 'drink': 1}
+04-26 17:31:58 Client 12    INFO     Request some food: {'hamburger': 2, 'fries': 0, 'drink': 1}
+04-26 17:31:58 Client 26    INFO     Wait for 2.935734 seconds
+04-26 17:31:58 Client 15    INFO     Request some food: {'hamburger': 0, 'fries': 0, 'drink': 1}
+04-26 17:31:58 Client 27    INFO     Wait for 1.778080 seconds
+04-26 17:31:59 Client 14    INFO     Request some food: {'hamburger': 1, 'fries': 2, 'drink': 1}
+04-26 17:31:59 Client 1     INFO     Received ticket d01ecd0a-6840-11e9-acef-a42bb0f9edd7
+04-26 17:31:59 Client 1     INFO     Pickup order d01ecd0a-6840-11e9-acef-a42bb0f9edd7
+04-26 17:31:59 Client 28    INFO     Wait for 1.775273 seconds
+04-26 17:31:59 Client 29    INFO     Wait for 1.703030 seconds
+04-26 17:31:59 Client 30    INFO     Wait for 2.663363 seconds
+04-26 17:31:59 Client 21    INFO     Request some food: {'hamburger': 0, 'fries': 0, 'drink': 1}
+04-26 17:31:59 Client 19    INFO     Request some food: {'hamburger': 0, 'fries': 1, 'drink': 0}
+04-26 17:31:59 Client 31    INFO     Wait for 1.837799 seconds
+04-26 17:31:59 Client 32    INFO     Wait for 1.778627 seconds
+04-26 17:31:59 Client 33    INFO     Wait for 1.766081 seconds
+04-26 17:31:59 Client 24    INFO     Request some food: {'hamburger': 1, 'fries': 0, 'drink': 2}
+04-26 17:32:00 Client 34    INFO     Wait for 2.485877 seconds
+04-26 17:32:00 Client 20    INFO     Request some food: {'hamburger': 0, 'fries': 0, 'drink': 1}
+04-26 17:32:00 Client 35    INFO     Wait for 1.649064 seconds
+04-26 17:32:00 Client 36    INFO     Wait for 2.087276 seconds
+04-26 17:32:00 Client 37    INFO     Wait for 2.372115 seconds
+04-26 17:32:00 Client 25    INFO     Request some food: {'hamburger': 1, 'fries': 0, 'drink': 0}
+04-26 17:32:00 Client 23    INFO     Request some food: {'hamburger': 0, 'fries': 1, 'drink': 0}
+04-26 17:32:00 Client 3     INFO     Received ticket d01ecd0b-6840-11e9-acef-a42bb0f9edd7
+04-26 17:32:00 Client 3     INFO     Pickup order d01ecd0b-6840-11e9-acef-a42bb0f9edd7
+04-26 17:32:00 Client 27    INFO     Request some food: {'hamburger': 1, 'fries': 0, 'drink': 3}
+04-26 17:32:00 Client 38    INFO     Wait for 2.270066 seconds
+04-26 17:32:00 Client 22    INFO     Request some food: {'hamburger': 2, 'fries': 2, 'drink': 0}
+04-26 17:32:00 Client 39    INFO     Wait for 1.872172 seconds
+04-26 17:32:00 Client 28    INFO     Request some food: {'hamburger': 0, 'fries': 1, 'drink': 1}
+04-26 17:32:01 Client 29    INFO     Request some food: {'hamburger': 0, 'fries': 0, 'drink': 1}
+04-26 17:32:01 Client 40    INFO     Wait for 2.008674 seconds
+04-26 17:32:01 Client 41    INFO     Wait for 2.887899 seconds
+04-26 17:32:01 Client 42    INFO     Wait for 0.900451 seconds
+04-26 17:32:01 Client 31    INFO     Request some food: {'hamburger': 1, 'fries': 0, 'drink': 1}
+04-26 17:32:01 Client 43    INFO     Wait for 1.721235 seconds
+04-26 17:32:01 Client 32    INFO     Request some food: {'hamburger': 0, 'fries': 1, 'drink': 0}
+04-26 17:32:01 Client 44    INFO     Wait for 1.778487 seconds
+04-26 17:32:01 Client 33    INFO     Request some food: {'hamburger': 0, 'fries': 2, 'drink': 1}
+04-26 17:32:01 Client 26    INFO     Request some food: {'hamburger': 0, 'fries': 0, 'drink': 1}
+04-26 17:32:01 Client 45    INFO     Wait for 1.590478 seconds
+04-26 17:32:01 Client 35    INFO     Request some food: {'hamburger': 2, 'fries': 0, 'drink': 0}
+04-26 17:32:02 Client 46    INFO     Wait for 2.139551 seconds
+04-26 17:32:02 Client 30    INFO     Request some food: {'hamburger': 0, 'fries': 1, 'drink': 0}
+04-26 17:32:02 Client 47    INFO     Wait for 1.957233 seconds
+04-26 17:32:02 Client 42    INFO     Request some food: {'hamburger': 0, 'fries': 0, 'drink': 1}
+04-26 17:32:02 Client 48    INFO     Wait for 1.527038 seconds
+04-26 17:32:02 Client 49    INFO     Wait for 2.069175 seconds
+04-26 17:32:02 Client 36    INFO     Request some food: {'hamburger': 0, 'fries': 1, 'drink': 2}
+04-26 17:32:02 Client 34    INFO     Request some food: {'hamburger': 1, 'fries': 0, 'drink': 0}
+04-26 17:32:02 Client 50    INFO     Wait for 2.459218 seconds
+04-26 17:32:02 Client 39    INFO     Request some food: {'hamburger': 0, 'fries': 2, 'drink': 2}
+04-26 17:32:02 Client 5     INFO     Received ticket d25d1f0e-6840-11e9-acef-a42bb0f9edd7
+04-26 17:32:02 Client 5     INFO     Pickup order d25d1f0e-6840-11e9-acef-a42bb0f9edd7
+04-26 17:32:02 Client 51    INFO     Wait for 1.418508 seconds
+04-26 17:32:02 Client 37    INFO     Request some food: {'hamburger': 2, 'fries': 0, 'drink': 0}
+04-26 17:32:03 Client 38    INFO     Request some food: {'hamburger': 0, 'fries': 1, 'drink': 3}
+04-26 17:32:03 Client 52    INFO     Wait for 1.877459 seconds
+04-26 17:32:03 Client 40    INFO     Request some food: {'hamburger': 0, 'fries': 1, 'drink': 1}
+04-26 17:32:03 Client 53    INFO     Wait for 2.285050 seconds
+04-26 17:32:03 Client 43    INFO     Request some food: {'hamburger': 0, 'fries': 0, 'drink': 1}
+04-26 17:32:03 Client 54    INFO     Wait for 1.329777 seconds
+04-26 17:32:03 Client 45    INFO     Request some food: {'hamburger': 0, 'fries': 0, 'drink': 1}
+04-26 17:32:03 Client 44    INFO     Request some food: {'hamburger': 0, 'fries': 0, 'drink': 1}
+04-26 17:32:03 Client 55    INFO     Wait for 1.882400 seconds
+04-26 17:32:03 Client 48    INFO     Request some food: {'hamburger': 1, 'fries': 0, 'drink': 2}
+04-26 17:32:03 Client 56    INFO     Wait for 2.120944 seconds
+04-26 17:32:04 Client 57    INFO     Wait for 2.516819 seconds
+04-26 17:32:04 Client 41    INFO     Request some food: {'hamburger': 1, 'fries': 2, 'drink': 0}
+04-26 17:32:04 Client 47    INFO     Request some food: {'hamburger': 0, 'fries': 1, 'drink': 2}
+04-26 17:32:04 Client 46    INFO     Request some food: {'hamburger': 0, 'fries': 2, 'drink': 0}
+04-26 17:32:04 Client 11    INFO     Received ticket d3350ae0-6840-11e9-acef-a42bb0f9edd7
+04-26 17:32:04 Client 11    INFO     Pickup order d3350ae0-6840-11e9-acef-a42bb0f9edd7
+04-26 17:32:04 Client 58    INFO     Wait for 1.611911 seconds
+04-26 17:32:04 Client 51    INFO     Request some food: {'hamburger': 1, 'fries': 0, 'drink': 1}
+04-26 17:32:04 Client 59    INFO     Wait for 2.394211 seconds
+04-26 17:32:04 Client 49    INFO     Request some food: {'hamburger': 0, 'fries': 0, 'drink': 2}
+04-26 17:32:04 Client 60    INFO     Wait for 2.514155 seconds
+04-26 17:32:04 Client 54    INFO     Request some food: {'hamburger': 0, 'fries': 2, 'drink': 2}
+04-26 17:32:04 Client 61    INFO     Wait for 2.644972 seconds
+04-26 17:32:04 Client 52    INFO     Request some food: {'hamburger': 2, 'fries': 1, 'drink': 1}
+04-26 17:32:05 Client 62    INFO     Wait for 2.284234 seconds
+04-26 17:32:05 Client 50    INFO     Request some food: {'hamburger': 3, 'fries': 2, 'drink': 0}
+04-26 17:32:05 Client 63    INFO     Wait for 2.637098 seconds
+04-26 17:32:05 Client 64    INFO     Wait for 1.173949 seconds
+04-26 17:32:05 Client 65    INFO     Wait for 2.175215 seconds
+04-26 17:32:05 Client 53    INFO     Request some food: {'hamburger': 0, 'fries': 0, 'drink': 1}
+04-26 17:32:05 Client 55    INFO     Request some food: {'hamburger': 0, 'fries': 1, 'drink': 0}
+04-26 17:32:05 Client 66    INFO     Wait for 1.911266 seconds
+04-26 17:32:05 Client 67    INFO     Wait for 2.136578 seconds
+04-26 17:32:05 Client 58    INFO     Request some food: {'hamburger': 1, 'fries': 0, 'drink': 0}
+04-26 17:32:05 Client 56    INFO     Request some food: {'hamburger': 1, 'fries': 1, 'drink': 0}
+04-26 17:32:06 Client 4     INFO     Received ticket d3350ae1-6840-11e9-acef-a42bb0f9edd7
+04-26 17:32:06 Client 4     INFO     Pickup order d3350ae1-6840-11e9-acef-a42bb0f9edd7
+04-26 17:32:06 Client 68    INFO     Wait for 2.884563 seconds
+04-26 17:32:06 Client 69    INFO     Wait for 1.780537 seconds
+04-26 17:32:06 Client 70    INFO     Wait for 2.341233 seconds
+04-26 17:32:06 Client 64    INFO     Request some food: {'hamburger': 1, 'fries': 1, 'drink': 2}
+04-26 17:32:06 Client 71    INFO     Wait for 0.999858 seconds
+04-26 17:32:06 Client 57    INFO     Request some food: {'hamburger': 1, 'fries': 1, 'drink': 0}
+04-26 17:32:06 Client 72    INFO     Wait for 2.524738 seconds
+04-26 17:32:06 Client 73    INFO     Wait for 2.091515 seconds
+04-26 17:32:06 Client 59    INFO     Request some food: {'hamburger': 0, 'fries': 2, 'drink': 2}
+04-26 17:32:07 Client 74    INFO     Wait for 2.785789 seconds
+04-26 17:32:07 Client 75    INFO     Wait for 3.031131 seconds
+04-26 17:32:07 Client 60    INFO     Request some food: {'hamburger': 2, 'fries': 0, 'drink': 2}
+04-26 17:32:07 Client 62    INFO     Request some food: {'hamburger': 1, 'fries': 0, 'drink': 2}
+04-26 17:32:07 Client 76    INFO     Wait for 1.942158 seconds
+04-26 17:32:07 Client 61    INFO     Request some food: {'hamburger': 0, 'fries': 0, 'drink': 1}
+04-26 17:32:07 Client 71    INFO     Request some food: {'hamburger': 1, 'fries': 1, 'drink': 0}
+04-26 17:32:07 Client 77    INFO     Wait for 0.998374 seconds
+04-26 17:32:07 Client 66    INFO     Request some food: {'hamburger': 1, 'fries': 0, 'drink': 1}
+04-26 17:32:07 Client 65    INFO     Request some food: {'hamburger': 2, 'fries': 1, 'drink': 2}
+04-26 17:32:07 Client 78    INFO     Wait for 2.065253 seconds
+04-26 17:32:07 Client 63    INFO     Request some food: {'hamburger': 1, 'fries': 2, 'drink': 0}
+04-26 17:32:07 Client 69    INFO     Request some food: {'hamburger': 0, 'fries': 0, 'drink': 1}
+04-26 17:32:07 Client 67    INFO     Request some food: {'hamburger': 2, 'fries': 0, 'drink': 2}
+04-26 17:32:08 Client 79    INFO     Wait for 1.561104 seconds
+04-26 17:32:08 Client 80    INFO     Wait for 1.630351 seconds
+04-26 17:32:08 Client 81    INFO     Wait for 1.977288 seconds
+04-26 17:32:08 Client 82    INFO     Wait for 2.483977 seconds
+04-26 17:32:08 Client 77    INFO     Request some food: {'hamburger': 5, 'fries': 0, 'drink': 0}
+04-26 17:32:08 Client 83    INFO     Wait for 1.486335 seconds
+04-26 17:32:08 Client 70    INFO     Request some food: {'hamburger': 0, 'fries': 0, 'drink': 1}
+04-26 17:32:08 Client 84    INFO     Wait for 2.176598 seconds
+04-26 17:32:08 Client 73    INFO     Request some food: {'hamburger': 0, 'fries': 0, 'drink': 1}
+04-26 17:32:08 Client 68    INFO     Request some food: {'hamburger': 1, 'fries': 4, 'drink': 0}
+04-26 17:32:08 Client 2     INFO     Received ticket d6060a26-6840-11e9-acef-a42bb0f9edd7
+04-26 17:32:08 Client 2     INFO     Pickup order d6060a26-6840-11e9-acef-a42bb0f9edd7
+04-26 17:32:09 Client 85    INFO     Wait for 1.958168 seconds
+04-26 17:32:09 Client 72    INFO     Request some food: {'hamburger': 1, 'fries': 3, 'drink': 0}
+04-26 17:32:09 Client 86    INFO     Wait for 2.186835 seconds
+04-26 17:32:09 Client 76    INFO     Request some food: {'hamburger': 1, 'fries': 0, 'drink': 0}
+04-26 17:32:09 Client 87    INFO     Wait for 1.761689 seconds
+04-26 17:32:09 Client 79    INFO     Request some food: {'hamburger': 2, 'fries': 0, 'drink': 3}
+04-26 17:32:09 Client 88    INFO     Wait for 2.285060 seconds
+04-26 17:32:09 Client 89    INFO     Wait for 1.603077 seconds
+04-26 17:32:09 Client 80    INFO     Request some food: {'hamburger': 1, 'fries': 2, 'drink': 1}
+04-26 17:32:09 Client 74    INFO     Request some food: {'hamburger': 1, 'fries': 3, 'drink': 0}
+04-26 17:32:09 Client 78    INFO     Request some food: {'hamburger': 2, 'fries': 0, 'drink': 1}
+04-26 17:32:09 Client 90    INFO     Wait for 2.171374 seconds
+04-26 17:32:10 Client 91    INFO     Wait for 2.278404 seconds
+04-26 17:32:10 Client 83    INFO     Request some food: {'hamburger': 1, 'fries': 2, 'drink': 0}
+04-26 17:32:10 Client 75    INFO     Request some food: {'hamburger': 1, 'fries': 1, 'drink': 0}
+04-26 17:32:10 Client 92    INFO     Wait for 1.156884 seconds
+04-26 17:32:10 Client 81    INFO     Request some food: {'hamburger': 1, 'fries': 0, 'drink': 1}
+04-26 17:32:10 Client 93    INFO     Wait for 1.839560 seconds
+04-26 17:32:10 Client 94    INFO     Wait for 1.785413 seconds
+04-26 17:32:10 Client 17    INFO     Received ticket d705a42c-6840-11e9-acef-a42bb0f9edd7
+04-26 17:32:10 Client 17    INFO     Pickup order d705a42c-6840-11e9-acef-a42bb0f9edd7
+04-26 17:32:10 Client 95    INFO     Wait for 2.424822 seconds
+04-26 17:32:10 Client 96    INFO     Wait for 2.322442 seconds
+04-26 17:32:10 Client 82    INFO     Request some food: {'hamburger': 2, 'fries': 0, 'drink': 2}
+04-26 17:32:11 Client 85    INFO     Request some food: {'hamburger': 1, 'fries': 0, 'drink': 0}
+04-26 17:32:11 Client 84    INFO     Request some food: {'hamburger': 0, 'fries': 1, 'drink': 1}
+04-26 17:32:11 Client 97    INFO     Wait for 2.183188 seconds
+04-26 17:32:11 Client 87    INFO     Request some food: {'hamburger': 2, 'fries': 1, 'drink': 2}
+04-26 17:32:11 Client 98    INFO     Wait for 1.831441 seconds
+04-26 17:32:11 Client 89    INFO     Request some food: {'hamburger': 0, 'fries': 2, 'drink': 2}
+04-26 17:32:11 Client 92    INFO     Request some food: {'hamburger': 0, 'fries': 2, 'drink': 2}
+04-26 17:32:11 Client 99    INFO     Wait for 2.000460 seconds
+04-26 17:32:11 Client 86    INFO     Request some food: {'hamburger': 0, 'fries': 3, 'drink': 0}
+04-26 17:32:11 Client 100   INFO     Wait for 2.161383 seconds
+04-26 17:32:11 Client 88    INFO     Request some food: {'hamburger': 0, 'fries': 2, 'drink': 0}
+04-26 17:32:12 Client 90    INFO     Request some food: {'hamburger': 2, 'fries': 1, 'drink': 1}
+04-26 17:32:12 Client 93    INFO     Request some food: {'hamburger': 1, 'fries': 3, 'drink': 0}
+04-26 17:32:12 Client 91    INFO     Request some food: {'hamburger': 0, 'fries': 4, 'drink': 0}
+04-26 17:32:12 Client 94    INFO     Request some food: {'hamburger': 0, 'fries': 1, 'drink': 2}
+04-26 17:32:12 Client 1     INFO     Got order {'hamburger': 1, 'fries': 2, 'drink': 0}
+04-26 17:32:12 Client 10    INFO     Received ticket d8319dba-6840-11e9-acef-a42bb0f9edd7
+04-26 17:32:12 Client 10    INFO     Pickup order d8319dba-6840-11e9-acef-a42bb0f9edd7
+04-26 17:32:13 Client 98    INFO     Request some food: {'hamburger': 2, 'fries': 0, 'drink': 3}
+04-26 17:32:13 Client 95    INFO     Request some food: {'hamburger': 0, 'fries': 1, 'drink': 3}
+04-26 17:32:13 Client 96    INFO     Request some food: {'hamburger': 1, 'fries': 0, 'drink': 0}
+04-26 17:32:13 Client 97    INFO     Request some food: {'hamburger': 0, 'fries': 3, 'drink': 2}
+04-26 17:32:13 Client 99    INFO     Request some food: {'hamburger': 2, 'fries': 0, 'drink': 2}
+04-26 17:32:13 Client 100   INFO     Request some food: {'hamburger': 1, 'fries': 2, 'drink': 1}
+04-26 17:32:14 Client 6     INFO     Received ticket d99a2690-6840-11e9-acef-a42bb0f9edd7
+04-26 17:32:14 Client 6     INFO     Pickup order d99a2690-6840-11e9-acef-a42bb0f9edd7
+04-26 17:32:16 Client 8     INFO     Received ticket daaeec0a-6840-11e9-acef-a42bb0f9edd7
+04-26 17:32:16 Client 8     INFO     Pickup order daaeec0a-6840-11e9-acef-a42bb0f9edd7
+04-26 17:32:18 Client 16    INFO     Received ticket db826d3c-6840-11e9-acef-a42bb0f9edd7
+04-26 17:32:18 Client 16    INFO     Pickup order db826d3c-6840-11e9-acef-a42bb0f9edd7
+04-26 17:32:20 Client 18    INFO     Received ticket dca9d5ec-6840-11e9-acef-a42bb0f9edd7
+04-26 17:32:20 Client 18    INFO     Pickup order dca9d5ec-6840-11e9-acef-a42bb0f9edd7
+04-26 17:32:22 Client 13    INFO     Received ticket de5be6d2-6840-11e9-acef-a42bb0f9edd7
+04-26 17:32:22 Client 13    INFO     Pickup order de5be6d2-6840-11e9-acef-a42bb0f9edd7
+04-26 17:32:24 Client 7     INFO     Received ticket df948504-6840-11e9-acef-a42bb0f9edd7
+04-26 17:32:24 Client 7     INFO     Pickup order df948504-6840-11e9-acef-a42bb0f9edd7
+04-26 17:32:26 Client 9     INFO     Received ticket e03865d4-6840-11e9-acef-a42bb0f9edd7
+04-26 17:32:26 Client 9     INFO     Pickup order e03865d4-6840-11e9-acef-a42bb0f9edd7
+04-26 17:32:29 Client 12    INFO     Received ticket e1fadeec-6840-11e9-acef-a42bb0f9edd7
+04-26 17:32:29 Client 12    INFO     Pickup order e1fadeec-6840-11e9-acef-a42bb0f9edd7
+04-26 17:32:29 Client 3     INFO     Got order {'hamburger': 1, 'fries': 2, 'drink': 2}
+04-26 17:32:30 Client 15    INFO     Received ticket e30db0de-6840-11e9-acef-a42bb0f9edd7
+04-26 17:32:30 Client 15    INFO     Pickup order e30db0de-6840-11e9-acef-a42bb0f9edd7
+04-26 17:32:33 Client 14    INFO     Received ticket e47e3ae2-6840-11e9-acef-a42bb0f9edd7
+04-26 17:32:33 Client 14    INFO     Pickup order e47e3ae2-6840-11e9-acef-a42bb0f9edd7
+04-26 17:32:33 Client 5     INFO     Got order {'hamburger': 0, 'fries': 1, 'drink': 0}
+04-26 17:32:34 Client 21    INFO     Received ticket e47e3ae3-6840-11e9-acef-a42bb0f9edd7
+04-26 17:32:34 Client 21    INFO     Pickup order e47e3ae3-6840-11e9-acef-a42bb0f9edd7
+04-26 17:32:36 Client 19    INFO     Received ticket e6632282-6840-11e9-acef-a42bb0f9edd7
+04-26 17:32:36 Client 19    INFO     Pickup order e6632282-6840-11e9-acef-a42bb0f9edd7
+04-26 17:32:38 Client 24    INFO     Received ticket e79b29f6-6840-11e9-acef-a42bb0f9edd7
+04-26 17:32:38 Client 24    INFO     Pickup order e79b29f6-6840-11e9-acef-a42bb0f9edd7
+04-26 17:32:39 Client 20    INFO     Received ticket e79b29f7-6840-11e9-acef-a42bb0f9edd7
+04-26 17:32:39 Client 20    INFO     Pickup order e79b29f7-6840-11e9-acef-a42bb0f9edd7
+04-26 17:32:42 Client 25    INFO     Received ticket e9d6a3ee-6840-11e9-acef-a42bb0f9edd7
+04-26 17:32:42 Client 25    INFO     Pickup order e9d6a3ee-6840-11e9-acef-a42bb0f9edd7
+04-26 17:32:43 Client 23    INFO     Received ticket e9d6a3ef-6840-11e9-acef-a42bb0f9edd7
+04-26 17:32:43 Client 23    INFO     Pickup order e9d6a3ef-6840-11e9-acef-a42bb0f9edd7
+04-26 17:32:44 Client 27    INFO     Received ticket eb73991e-6840-11e9-acef-a42bb0f9edd7
+04-26 17:32:44 Client 27    INFO     Pickup order eb73991e-6840-11e9-acef-a42bb0f9edd7
+04-26 17:32:47 Client 11    INFO     Got order {'hamburger': 1, 'fries': 2, 'drink': 1}
+04-26 17:32:47 Client 22    INFO     Received ticket ecc11e5e-6840-11e9-acef-a42bb0f9edd7
+04-26 17:32:47 Client 22    INFO     Pickup order ecc11e5e-6840-11e9-acef-a42bb0f9edd7
+04-26 17:32:48 Client 28    INFO     Received ticket ecc11e5f-6840-11e9-acef-a42bb0f9edd7
+04-26 17:32:48 Client 28    INFO     Pickup order ecc11e5f-6840-11e9-acef-a42bb0f9edd7
+04-26 17:32:49 Client 29    INFO     Received ticket ee6eebd2-6840-11e9-acef-a42bb0f9edd7
+04-26 17:32:49 Client 29    INFO     Pickup order ee6eebd2-6840-11e9-acef-a42bb0f9edd7
+04-26 17:32:52 Client 31    INFO     Received ticket efee7220-6840-11e9-acef-a42bb0f9edd7
+04-26 17:32:52 Client 31    INFO     Pickup order efee7220-6840-11e9-acef-a42bb0f9edd7
+04-26 17:32:54 Client 32    INFO     Received ticket f130c412-6840-11e9-acef-a42bb0f9edd7
+04-26 17:32:54 Client 32    INFO     Pickup order f130c412-6840-11e9-acef-a42bb0f9edd7
+04-26 17:32:56 Client 33    INFO     Received ticket f26744fa-6840-11e9-acef-a42bb0f9edd7
+04-26 17:32:56 Client 33    INFO     Pickup order f26744fa-6840-11e9-acef-a42bb0f9edd7
+04-26 17:32:58 Client 26    INFO     Received ticket f3a24f22-6840-11e9-acef-a42bb0f9edd7
+04-26 17:32:58 Client 26    INFO     Pickup order f3a24f22-6840-11e9-acef-a42bb0f9edd7
+04-26 17:32:59 Client 35    INFO     Received ticket f3a24f23-6840-11e9-acef-a42bb0f9edd7
+04-26 17:32:59 Client 35    INFO     Pickup order f3a24f23-6840-11e9-acef-a42bb0f9edd7
+04-26 17:33:00 Client 4     INFO     Got order {'hamburger': 2, 'fries': 1, 'drink': 2}
+04-26 17:33:01 Client 30    INFO     Received ticket f57d7f38-6840-11e9-acef-a42bb0f9edd7
+04-26 17:33:01 Client 30    INFO     Pickup order f57d7f38-6840-11e9-acef-a42bb0f9edd7
+04-26 17:33:03 Client 42    INFO     Received ticket f6535108-6840-11e9-acef-a42bb0f9edd7
+04-26 17:33:03 Client 42    INFO     Pickup order f6535108-6840-11e9-acef-a42bb0f9edd7
+04-26 17:33:04 Client 36    INFO     Received ticket f6535109-6840-11e9-acef-a42bb0f9edd7
+04-26 17:33:04 Client 36    INFO     Pickup order f6535109-6840-11e9-acef-a42bb0f9edd7
+04-26 17:33:06 Client 34    INFO     Received ticket f849c5b4-6840-11e9-acef-a42bb0f9edd7
+04-26 17:33:06 Client 34    INFO     Pickup order f849c5b4-6840-11e9-acef-a42bb0f9edd7
+04-26 17:33:08 Client 39    INFO     Received ticket f9c4e248-6840-11e9-acef-a42bb0f9edd7
+04-26 17:33:08 Client 39    INFO     Pickup order f9c4e248-6840-11e9-acef-a42bb0f9edd7
+04-26 17:33:11 Client 37    INFO     Received ticket fb20e934-6840-11e9-acef-a42bb0f9edd7
+04-26 17:33:11 Client 37    INFO     Pickup order fb20e934-6840-11e9-acef-a42bb0f9edd7
+04-26 17:33:12 Client 38    INFO     Received ticket fb20e935-6840-11e9-acef-a42bb0f9edd7
+04-26 17:33:12 Client 38    INFO     Pickup order fb20e935-6840-11e9-acef-a42bb0f9edd7
+04-26 17:33:12 Client 2     INFO     Got order {'hamburger': 1, 'fries': 2, 'drink': 0}
+04-26 17:33:14 Client 40    INFO     Received ticket fd48472a-6840-11e9-acef-a42bb0f9edd7
+04-26 17:33:14 Client 40    INFO     Pickup order fd48472a-6840-11e9-acef-a42bb0f9edd7
+04-26 17:33:15 Client 17    INFO     Got order {'hamburger': 1, 'fries': 0, 'drink': 0}
+04-26 17:33:16 Client 43    INFO     Received ticket fe4077ba-6840-11e9-acef-a42bb0f9edd7
+04-26 17:33:16 Client 43    INFO     Pickup order fe4077ba-6840-11e9-acef-a42bb0f9edd7
+04-26 17:33:17 Client 45    INFO     Received ticket fe4077bb-6840-11e9-acef-a42bb0f9edd7
+04-26 17:33:17 Client 45    INFO     Pickup order fe4077bb-6840-11e9-acef-a42bb0f9edd7
+04-26 17:33:18 Client 10    INFO     Got order {'hamburger': 1, 'fries': 0, 'drink': 0}
+04-26 17:33:19 Client 44    INFO     Received ticket ffff3f46-6840-11e9-acef-a42bb0f9edd7
+04-26 17:33:19 Client 44    INFO     Pickup order ffff3f46-6840-11e9-acef-a42bb0f9edd7
+04-26 17:33:21 Client 48    INFO     Received ticket 010c6a08-6841-11e9-acef-a42bb0f9edd7
+04-26 17:33:21 Client 48    INFO     Pickup order 010c6a08-6841-11e9-acef-a42bb0f9edd7
+04-26 17:33:22 Client 41    INFO     Received ticket 010c6a09-6841-11e9-acef-a42bb0f9edd7
+04-26 17:33:22 Client 41    INFO     Pickup order 010c6a09-6841-11e9-acef-a42bb0f9edd7
+04-26 17:33:24 Client 47    INFO     Received ticket 03123e7c-6841-11e9-acef-a42bb0f9edd7
+04-26 17:33:24 Client 47    INFO     Pickup order 03123e7c-6841-11e9-acef-a42bb0f9edd7
+04-26 17:33:26 Client 46    INFO     Received ticket 0415a96c-6841-11e9-acef-a42bb0f9edd7
+04-26 17:33:26 Client 46    INFO     Pickup order 0415a96c-6841-11e9-acef-a42bb0f9edd7
+04-26 17:33:28 Client 51    INFO     Received ticket 056696c8-6841-11e9-acef-a42bb0f9edd7
+04-26 17:33:28 Client 51    INFO     Pickup order 056696c8-6841-11e9-acef-a42bb0f9edd7
+04-26 17:33:28 Client 6     INFO     Got order {'hamburger': 2, 'fries': 1, 'drink': 0}
+04-26 17:33:31 Client 49    INFO     Received ticket 070ee0ac-6841-11e9-acef-a42bb0f9edd7
+04-26 17:33:31 Client 49    INFO     Pickup order 070ee0ac-6841-11e9-acef-a42bb0f9edd7
+04-26 17:33:33 Client 54    INFO     Received ticket 082c24c2-6841-11e9-acef-a42bb0f9edd7
+04-26 17:33:33 Client 54    INFO     Pickup order 082c24c2-6841-11e9-acef-a42bb0f9edd7
+04-26 17:33:34 Client 52    INFO     Received ticket 082c24c3-6841-11e9-acef-a42bb0f9edd7
+04-26 17:33:34 Client 52    INFO     Pickup order 082c24c3-6841-11e9-acef-a42bb0f9edd7
+04-26 17:33:37 Client 50    INFO     Received ticket 0a9efa0e-6841-11e9-acef-a42bb0f9edd7
+04-26 17:33:37 Client 50    INFO     Pickup order 0a9efa0e-6841-11e9-acef-a42bb0f9edd7
+04-26 17:33:39 Client 53    INFO     Received ticket 0bf306b6-6841-11e9-acef-a42bb0f9edd7
+04-26 17:33:39 Client 53    INFO     Pickup order 0bf306b6-6841-11e9-acef-a42bb0f9edd7
+04-26 17:33:42 Client 55    INFO     Received ticket 0df59e9c-6841-11e9-acef-a42bb0f9edd7
+04-26 17:33:42 Client 55    INFO     Pickup order 0df59e9c-6841-11e9-acef-a42bb0f9edd7
+04-26 17:33:44 Client 58    INFO     Received ticket 0ed9790a-6841-11e9-acef-a42bb0f9edd7
+04-26 17:33:44 Client 58    INFO     Pickup order 0ed9790a-6841-11e9-acef-a42bb0f9edd7
+04-26 17:33:45 Client 56    INFO     Received ticket 0ed9790b-6841-11e9-acef-a42bb0f9edd7
+04-26 17:33:45 Client 56    INFO     Pickup order 0ed9790b-6841-11e9-acef-a42bb0f9edd7
+04-26 17:33:47 Client 64    INFO     Received ticket 10c9573a-6841-11e9-acef-a42bb0f9edd7
+04-26 17:33:47 Client 64    INFO     Pickup order 10c9573a-6841-11e9-acef-a42bb0f9edd7
+04-26 17:33:49 Client 8     INFO     Got order {'hamburger': 1, 'fries': 3, 'drink': 1}
+04-26 17:33:49 Client 57    INFO     Received ticket 11f7ecfc-6841-11e9-acef-a42bb0f9edd7
+04-26 17:33:49 Client 57    INFO     Pickup order 11f7ecfc-6841-11e9-acef-a42bb0f9edd7
+04-26 17:33:50 Client 59    INFO     Received ticket 11f7ecfd-6841-11e9-acef-a42bb0f9edd7
+04-26 17:33:50 Client 59    INFO     Pickup order 11f7ecfd-6841-11e9-acef-a42bb0f9edd7
+04-26 17:33:52 Client 60    INFO     Received ticket 13ddbaba-6841-11e9-acef-a42bb0f9edd7
+04-26 17:33:52 Client 60    INFO     Pickup order 13ddbaba-6841-11e9-acef-a42bb0f9edd7
+04-26 17:33:54 Client 62    INFO     Received ticket 1503de24-6841-11e9-acef-a42bb0f9edd7
+04-26 17:33:54 Client 62    INFO     Pickup order 1503de24-6841-11e9-acef-a42bb0f9edd7
+04-26 17:33:56 Client 16    INFO     Got order {'hamburger': 2, 'fries': 0, 'drink': 1}
+04-26 17:33:56 Client 61    INFO     Received ticket 164f9066-6841-11e9-acef-a42bb0f9edd7
+04-26 17:33:56 Client 61    INFO     Pickup order 164f9066-6841-11e9-acef-a42bb0f9edd7
+04-26 17:33:59 Client 71    INFO     Received ticket 17cd225a-6841-11e9-acef-a42bb0f9edd7
+04-26 17:33:59 Client 71    INFO     Pickup order 17cd225a-6841-11e9-acef-a42bb0f9edd7
+04-26 17:34:00 Client 18    INFO     Got order {'hamburger': 0, 'fries': 0, 'drink': 2}
+04-26 17:34:01 Client 13    INFO     Got order {'hamburger': 0, 'fries': 0, 'drink': 1}
+04-26 17:34:01 Client 66    INFO     Received ticket 195444d2-6841-11e9-acef-a42bb0f9edd7
+04-26 17:34:01 Client 66    INFO     Pickup order 195444d2-6841-11e9-acef-a42bb0f9edd7
+04-26 17:34:04 Client 65    INFO     Received ticket 1aa42db6-6841-11e9-acef-a42bb0f9edd7
+04-26 17:34:04 Client 65    INFO     Pickup order 1aa42db6-6841-11e9-acef-a42bb0f9edd7
+04-26 17:34:04 Client 7     INFO     Got order {'hamburger': 1, 'fries': 0, 'drink': 0}
+04-26 17:34:05 Client 63    INFO     Received ticket 1aa42db7-6841-11e9-acef-a42bb0f9edd7
+04-26 17:34:05 Client 63    INFO     Pickup order 1aa42db7-6841-11e9-acef-a42bb0f9edd7
+04-26 17:34:05 Client 9     INFO     Got order {'hamburger': 0, 'fries': 0, 'drink': 1}
+04-26 17:34:07 Client 69    INFO     Received ticket 1cbbb5a6-6841-11e9-acef-a42bb0f9edd7
+04-26 17:34:07 Client 69    INFO     Pickup order 1cbbb5a6-6841-11e9-acef-a42bb0f9edd7
+04-26 17:34:09 Client 67    INFO     Received ticket 1ddab3b0-6841-11e9-acef-a42bb0f9edd7
+04-26 17:34:09 Client 67    INFO     Pickup order 1ddab3b0-6841-11e9-acef-a42bb0f9edd7
+04-26 17:34:11 Client 77    INFO     Received ticket 1f484852-6841-11e9-acef-a42bb0f9edd7
+04-26 17:34:11 Client 77    INFO     Pickup order 1f484852-6841-11e9-acef-a42bb0f9edd7
+04-26 17:34:12 Client 12    INFO     Got order {'hamburger': 2, 'fries': 0, 'drink': 1}
+04-26 17:34:14 Client 15    INFO     Got order {'hamburger': 0, 'fries': 0, 'drink': 1}
+04-26 17:34:14 Client 70    INFO     Received ticket 20d8d02e-6841-11e9-acef-a42bb0f9edd7
+04-26 17:34:14 Client 70    INFO     Pickup order 20d8d02e-6841-11e9-acef-a42bb0f9edd7
+04-26 17:34:17 Client 73    INFO     Received ticket 228cc89e-6841-11e9-acef-a42bb0f9edd7
+04-26 17:34:17 Client 73    INFO     Pickup order 228cc89e-6841-11e9-acef-a42bb0f9edd7
+04-26 17:34:18 Client 68    INFO     Received ticket 228cc89f-6841-11e9-acef-a42bb0f9edd7
+04-26 17:34:18 Client 68    INFO     Pickup order 228cc89f-6841-11e9-acef-a42bb0f9edd7
+04-26 17:34:20 Client 72    INFO     Received ticket 2470c084-6841-11e9-acef-a42bb0f9edd7
+04-26 17:34:20 Client 72    INFO     Pickup order 2470c084-6841-11e9-acef-a42bb0f9edd7
+04-26 17:34:23 Client 76    INFO     Received ticket 26087234-6841-11e9-acef-a42bb0f9edd7
+04-26 17:34:23 Client 76    INFO     Pickup order 26087234-6841-11e9-acef-a42bb0f9edd7
+04-26 17:34:25 Client 79    INFO     Received ticket 2796bf3e-6841-11e9-acef-a42bb0f9edd7
+04-26 17:34:25 Client 79    INFO     Pickup order 2796bf3e-6841-11e9-acef-a42bb0f9edd7
+04-26 17:34:26 Client 14    INFO     Got order {'hamburger': 1, 'fries': 2, 'drink': 1}
+04-26 17:34:27 Client 80    INFO     Received ticket 289964ae-6841-11e9-acef-a42bb0f9edd7
+04-26 17:34:27 Client 80    INFO     Pickup order 289964ae-6841-11e9-acef-a42bb0f9edd7
+04-26 17:34:28 Client 21    INFO     Got order {'hamburger': 0, 'fries': 0, 'drink': 1}
+04-26 17:34:30 Client 74    INFO     Received ticket 2a37f6b8-6841-11e9-acef-a42bb0f9edd7
+04-26 17:34:30 Client 74    INFO     Pickup order 2a37f6b8-6841-11e9-acef-a42bb0f9edd7
+04-26 17:34:32 Client 78    INFO     Received ticket 2b682efe-6841-11e9-acef-a42bb0f9edd7
+04-26 17:34:32 Client 78    INFO     Pickup order 2b682efe-6841-11e9-acef-a42bb0f9edd7
+04-26 17:34:33 Client 19    INFO     Got order {'hamburger': 0, 'fries': 1, 'drink': 0}
+04-26 17:34:34 Client 83    INFO     Received ticket 2cf0fc56-6841-11e9-acef-a42bb0f9edd7
+04-26 17:34:34 Client 83    INFO     Pickup order 2cf0fc56-6841-11e9-acef-a42bb0f9edd7
+04-26 17:34:37 Client 75    INFO     Received ticket 2e793e9e-6841-11e9-acef-a42bb0f9edd7
+04-26 17:34:37 Client 75    INFO     Pickup order 2e793e9e-6841-11e9-acef-a42bb0f9edd7
+04-26 17:34:38 Client 24    INFO     Got order {'hamburger': 1, 'fries': 0, 'drink': 2}
+04-26 17:34:38 Client 81    INFO     Received ticket 2e793e9f-6841-11e9-acef-a42bb0f9edd7
+04-26 17:34:38 Client 81    INFO     Pickup order 2e793e9f-6841-11e9-acef-a42bb0f9edd7
+04-26 17:34:39 Client 20    INFO     Got order {'hamburger': 0, 'fries': 0, 'drink': 1}
+04-26 17:34:41 Client 82    INFO     Received ticket 31023e0e-6841-11e9-acef-a42bb0f9edd7
+04-26 17:34:41 Client 82    INFO     Pickup order 31023e0e-6841-11e9-acef-a42bb0f9edd7
+04-26 17:34:43 Client 25    INFO     Got order {'hamburger': 1, 'fries': 0, 'drink': 0}
+04-26 17:34:44 Client 85    INFO     Received ticket 32b31a34-6841-11e9-acef-a42bb0f9edd7
+04-26 17:34:44 Client 85    INFO     Pickup order 32b31a34-6841-11e9-acef-a42bb0f9edd7
+04-26 17:34:46 Client 84    INFO     Received ticket 3403e580-6841-11e9-acef-a42bb0f9edd7
+04-26 17:34:46 Client 84    INFO     Pickup order 3403e580-6841-11e9-acef-a42bb0f9edd7
+04-26 17:34:47 Client 87    INFO     Received ticket 3403e581-6841-11e9-acef-a42bb0f9edd7
+04-26 17:34:47 Client 87    INFO     Pickup order 3403e581-6841-11e9-acef-a42bb0f9edd7
+04-26 17:34:48 Client 23    INFO     Got order {'hamburger': 0, 'fries': 1, 'drink': 0}
+04-26 17:34:49 Client 89    INFO     Received ticket 35fb16ec-6841-11e9-acef-a42bb0f9edd7
+04-26 17:34:49 Client 89    INFO     Pickup order 35fb16ec-6841-11e9-acef-a42bb0f9edd7
+04-26 17:34:51 Client 92    INFO     Received ticket 370eb4f8-6841-11e9-acef-a42bb0f9edd7
+04-26 17:34:51 Client 92    INFO     Pickup order 370eb4f8-6841-11e9-acef-a42bb0f9edd7
+04-26 17:34:53 Client 86    INFO     Received ticket 3823e05c-6841-11e9-acef-a42bb0f9edd7
+04-26 17:34:53 Client 86    INFO     Pickup order 3823e05c-6841-11e9-acef-a42bb0f9edd7
+04-26 17:34:55 Client 88    INFO     Received ticket 39362a90-6841-11e9-acef-a42bb0f9edd7
+04-26 17:34:55 Client 88    INFO     Pickup order 39362a90-6841-11e9-acef-a42bb0f9edd7
+04-26 17:34:57 Client 27    INFO     Got order {'hamburger': 1, 'fries': 0, 'drink': 3}
+04-26 17:34:57 Client 90    INFO     Received ticket 3a7b21da-6841-11e9-acef-a42bb0f9edd7
+04-26 17:34:57 Client 90    INFO     Pickup order 3a7b21da-6841-11e9-acef-a42bb0f9edd7
+04-26 17:35:00 Client 93    INFO     Received ticket 3c101eec-6841-11e9-acef-a42bb0f9edd7
+04-26 17:35:00 Client 93    INFO     Pickup order 3c101eec-6841-11e9-acef-a42bb0f9edd7
+04-26 17:35:02 Client 91    INFO     Received ticket 3d7ea7da-6841-11e9-acef-a42bb0f9edd7
+04-26 17:35:02 Client 91    INFO     Pickup order 3d7ea7da-6841-11e9-acef-a42bb0f9edd7
+04-26 17:35:04 Client 94    INFO     Received ticket 3ead6358-6841-11e9-acef-a42bb0f9edd7
+04-26 17:35:04 Client 94    INFO     Pickup order 3ead6358-6841-11e9-acef-a42bb0f9edd7
+04-26 17:35:07 Client 98    INFO     Received ticket 404827a2-6841-11e9-acef-a42bb0f9edd7
+04-26 17:35:07 Client 98    INFO     Pickup order 404827a2-6841-11e9-acef-a42bb0f9edd7
+04-26 17:35:08 Client 95    INFO     Received ticket 404827a3-6841-11e9-acef-a42bb0f9edd7
+04-26 17:35:08 Client 95    INFO     Pickup order 404827a3-6841-11e9-acef-a42bb0f9edd7
+04-26 17:35:10 Client 96    INFO     Received ticket 425d8352-6841-11e9-acef-a42bb0f9edd7
+04-26 17:35:10 Client 96    INFO     Pickup order 425d8352-6841-11e9-acef-a42bb0f9edd7
+04-26 17:35:12 Client 97    INFO     Received ticket 43278a9e-6841-11e9-acef-a42bb0f9edd7
+04-26 17:35:12 Client 97    INFO     Pickup order 43278a9e-6841-11e9-acef-a42bb0f9edd7
+04-26 17:35:12 Client 22    INFO     Got order {'hamburger': 2, 'fries': 2, 'drink': 0}
+04-26 17:35:14 Client 99    INFO     Received ticket 44b12e56-6841-11e9-acef-a42bb0f9edd7
+04-26 17:35:14 Client 99    INFO     Pickup order 44b12e56-6841-11e9-acef-a42bb0f9edd7
+04-26 17:35:16 Client 100   INFO     Received ticket 45be775e-6841-11e9-acef-a42bb0f9edd7
+04-26 17:35:16 Client 100   INFO     Pickup order 45be775e-6841-11e9-acef-a42bb0f9edd7
+04-26 17:35:18 Client 28    INFO     Got order {'hamburger': 0, 'fries': 1, 'drink': 1}
+04-26 17:35:18 Client 29    INFO     Got order {'hamburger': 0, 'fries': 0, 'drink': 1}
+04-26 17:35:23 Client 31    INFO     Got order {'hamburger': 1, 'fries': 0, 'drink': 1}
+04-26 17:35:28 Client 32    INFO     Got order {'hamburger': 0, 'fries': 1, 'drink': 0}
+04-26 17:35:37 Client 33    INFO     Got order {'hamburger': 0, 'fries': 2, 'drink': 1}
+04-26 17:35:39 Client 26    INFO     Got order {'hamburger': 0, 'fries': 0, 'drink': 1}
+04-26 17:35:43 Client 35    INFO     Got order {'hamburger': 2, 'fries': 0, 'drink': 0}
+04-26 17:35:48 Client 30    INFO     Got order {'hamburger': 0, 'fries': 1, 'drink': 0}
+04-26 17:35:49 Client 42    INFO     Got order {'hamburger': 0, 'fries': 0, 'drink': 1}
+04-26 17:35:57 Client 36    INFO     Got order {'hamburger': 0, 'fries': 1, 'drink': 2}
+04-26 17:36:01 Client 34    INFO     Got order {'hamburger': 1, 'fries': 0, 'drink': 0}
+04-26 17:36:11 Client 39    INFO     Got order {'hamburger': 0, 'fries': 2, 'drink': 2}
+04-26 17:36:17 Client 37    INFO     Got order {'hamburger': 2, 'fries': 0, 'drink': 0}
+04-26 17:36:24 Client 38    INFO     Got order {'hamburger': 0, 'fries': 1, 'drink': 3}
+04-26 17:36:31 Client 40    INFO     Got order {'hamburger': 0, 'fries': 1, 'drink': 1}
+04-26 17:36:32 Client 43    INFO     Got order {'hamburger': 0, 'fries': 0, 'drink': 1}
+04-26 17:36:34 Client 45    INFO     Got order {'hamburger': 0, 'fries': 0, 'drink': 1}
+04-26 17:36:36 Client 44    INFO     Got order {'hamburger': 0, 'fries': 0, 'drink': 1}
+04-26 17:36:41 Client 48    INFO     Got order {'hamburger': 1, 'fries': 0, 'drink': 2}
+04-26 17:36:54 Client 41    INFO     Got order {'hamburger': 1, 'fries': 2, 'drink': 0}
+04-26 17:37:01 Client 47    INFO     Got order {'hamburger': 0, 'fries': 1, 'drink': 2}
+04-26 17:37:10 Client 46    INFO     Got order {'hamburger': 0, 'fries': 2, 'drink': 0}
+04-26 17:37:14 Client 51    INFO     Got order {'hamburger': 1, 'fries': 0, 'drink': 1}
+04-26 17:37:17 Client 49    INFO     Got order {'hamburger': 0, 'fries': 0, 'drink': 2}
+04-26 17:37:29 Client 54    INFO     Got order {'hamburger': 0, 'fries': 2, 'drink': 2}
+04-26 17:37:40 Client 52    INFO     Got order {'hamburger': 2, 'fries': 1, 'drink': 1}
+04-26 17:37:59 Client 50    INFO     Got order {'hamburger': 3, 'fries': 2, 'drink': 0}
+04-26 17:38:00 Client 53    INFO     Got order {'hamburger': 0, 'fries': 0, 'drink': 1}
+04-26 17:38:04 Client 55    INFO     Got order {'hamburger': 0, 'fries': 1, 'drink': 0}
+04-26 17:38:07 Client 58    INFO     Got order {'hamburger': 1, 'fries': 0, 'drink': 0}
+04-26 17:38:16 Client 56    INFO     Got order {'hamburger': 1, 'fries': 1, 'drink': 0}
+04-26 17:38:28 Client 64    INFO     Got order {'hamburger': 1, 'fries': 1, 'drink': 2}
+04-26 17:38:36 Client 57    INFO     Got order {'hamburger': 1, 'fries': 1, 'drink': 0}
+04-26 17:38:49 Client 59    INFO     Got order {'hamburger': 0, 'fries': 2, 'drink': 2}
+04-26 17:38:56 Client 60    INFO     Got order {'hamburger': 2, 'fries': 0, 'drink': 2}
+04-26 17:39:00 Client 62    INFO     Got order {'hamburger': 1, 'fries': 0, 'drink': 2}
+04-26 17:39:00 Client 61    INFO     Got order {'hamburger': 0, 'fries': 0, 'drink': 1}
+04-26 17:39:08 Client 71    INFO     Got order {'hamburger': 1, 'fries': 1, 'drink': 0}
+04-26 17:39:12 Client 66    INFO     Got order {'hamburger': 1, 'fries': 0, 'drink': 1}
+04-26 17:39:25 Client 65    INFO     Got order {'hamburger': 2, 'fries': 1, 'drink': 2}
+04-26 17:39:38 Client 63    INFO     Got order {'hamburger': 1, 'fries': 2, 'drink': 0}
+04-26 17:39:39 Client 69    INFO     Got order {'hamburger': 0, 'fries': 0, 'drink': 1}
+04-26 17:39:47 Client 67    INFO     Got order {'hamburger': 2, 'fries': 0, 'drink': 2}
+04-26 17:40:03 Client 77    INFO     Got order {'hamburger': 5, 'fries': 0, 'drink': 0}
+04-26 17:40:03 Client 70    INFO     Got order {'hamburger': 0, 'fries': 0, 'drink': 1}
+04-26 17:40:03 Client 73    INFO     Got order {'hamburger': 0, 'fries': 0, 'drink': 1}
+04-26 17:40:25 Client 68    INFO     Got order {'hamburger': 1, 'fries': 4, 'drink': 0}
+04-26 17:40:43 Client 72    INFO     Got order {'hamburger': 1, 'fries': 3, 'drink': 0}
+04-26 17:40:46 Client 76    INFO     Got order {'hamburger': 1, 'fries': 0, 'drink': 0}
+04-26 17:40:56 Client 79    INFO     Got order {'hamburger': 2, 'fries': 0, 'drink': 3}
+04-26 17:41:13 Client 80    INFO     Got order {'hamburger': 1, 'fries': 2, 'drink': 1}
+04-26 17:41:31 Client 74    INFO     Got order {'hamburger': 1, 'fries': 3, 'drink': 0}
+04-26 17:41:36 Client 78    INFO     Got order {'hamburger': 2, 'fries': 0, 'drink': 1}
+04-26 17:41:48 Client 83    INFO     Got order {'hamburger': 1, 'fries': 2, 'drink': 0}
+04-26 17:41:54 Client 75    INFO     Got order {'hamburger': 1, 'fries': 1, 'drink': 0}
+04-26 17:41:58 Client 81    INFO     Got order {'hamburger': 1, 'fries': 0, 'drink': 1}
+04-26 17:42:04 Client 82    INFO     Got order {'hamburger': 2, 'fries': 0, 'drink': 2}
+04-26 17:42:07 Client 85    INFO     Got order {'hamburger': 1, 'fries': 0, 'drink': 0}
+04-26 17:42:14 Client 84    INFO     Got order {'hamburger': 0, 'fries': 1, 'drink': 1}
+04-26 17:42:27 Client 87    INFO     Got order {'hamburger': 2, 'fries': 1, 'drink': 2}
+04-26 17:42:38 Client 89    INFO     Got order {'hamburger': 0, 'fries': 2, 'drink': 2}
+04-26 17:42:49 Client 92    INFO     Got order {'hamburger': 0, 'fries': 2, 'drink': 2}
+04-26 17:43:04 Client 86    INFO     Got order {'hamburger': 0, 'fries': 3, 'drink': 0}
+04-26 17:43:16 Client 88    INFO     Got order {'hamburger': 0, 'fries': 2, 'drink': 0}
+04-26 17:43:29 Client 90    INFO     Got order {'hamburger': 2, 'fries': 1, 'drink': 1}
+04-26 17:43:46 Client 93    INFO     Got order {'hamburger': 1, 'fries': 3, 'drink': 0}
+04-26 17:44:06 Client 91    INFO     Got order {'hamburger': 0, 'fries': 4, 'drink': 0}
+04-26 17:44:15 Client 94    INFO     Got order {'hamburger': 0, 'fries': 1, 'drink': 2}
+04-26 17:44:24 Client 98    INFO     Got order {'hamburger': 2, 'fries': 0, 'drink': 3}
+04-26 17:44:32 Client 95    INFO     Got order {'hamburger': 0, 'fries': 1, 'drink': 3}
+04-26 17:44:35 Client 96    INFO     Got order {'hamburger': 1, 'fries': 0, 'drink': 0}
+04-26 17:44:52 Client 97    INFO     Got order {'hamburger': 0, 'fries': 3, 'drink': 2}
+04-26 17:44:59 Client 99    INFO     Got order {'hamburger': 2, 'fries': 0, 'drink': 2}
+04-26 17:45:14 Client 100   INFO     Got order {'hamburger': 1, 'fries': 2, 'drink': 1}

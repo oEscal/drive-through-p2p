@@ -8,7 +8,7 @@ else
     nodes_s=( $(echo "$(shuf -e "${nodes[@]}")" | sed -r 's/(.[^;]*;)/ \1 /g' | tr " " "\n" | shuf | tr -d " " ) )
     for i in "${nodes_s[@]}"
     do
-        echo "$i"
+        echo "$i initialized"
         gnome-terminal -x bash -c "echo $i; python3 $i; exec bash" 2>&1 >/dev/null
         sleep $1
     done

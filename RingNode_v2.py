@@ -173,11 +173,12 @@ class RingNode(threading.Thread):
             elif message_received['method'] == NODE_DISCOVERY:
                self.discoveryReply(message_received['args'])
             elif message_received['method'] == ORDER:
-               self.logger.debug("Message received from client: " + str(message_received_copy))
-
+               
                message_received_copy = copy.deepcopy(message_received)
                message_received_copy['args']['food'] = print_out(message_received_copy['args']['food'])
+               self.logger.debug("Message received from client: " + str(message_received_copy))
                self.sendMessageToToken(self.entities['Waiter'], message_received['args'])
+
             elif message_received['method'] == PICKUP:
                self.logger.debug("Message received from client: " + str(message_received))
 
