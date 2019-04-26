@@ -8,20 +8,16 @@ import logging
 import argparse
 from utils import ORDER, PICKUP, print_out
 from food import Hamburger, Drink, Chips
-
-
 logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
                     datefmt='%m-%d %H:%M:%S')
 
-
-def main(port, ring, timeout):
+def main(port, ring):
    # Create a logger for the client
    logger = logging.getLogger('Client')
 
    # UDP Socket
    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-   #sock.settimeout(timeout)
    sock.bind(('localhost', port))
 
    # Wait for a random time
@@ -56,7 +52,7 @@ def main(port, ring, timeout):
    # Wait for order
    p, addr = sock.recvfrom(1024)
    o = pickle.loads(p)
-   logger.info('Got order %s', print_out(o['args']))
+   logger.info('Got order %s', o['args'])
 
    # Close socket
    sock.close()
@@ -70,4 +66,4 @@ if __name__ == '__main__':
    parser.add_argument('-r', dest='ring', type=int, help='ring ports ', default=5000)
    parser.add_argument('-t', dest='timeout', type=int, help='socket timeout', default=30)
    args = parser.parse_args()
-   main(args.port, ('localhost', args.ring), args.timeout)
+   main(args.port, ('localhost', args.ring))

@@ -1,5 +1,6 @@
 from food import Hamburger, Chips, Drink
 from utils import ORDER, PICKUP, GIVE_FOOD
+from encapsulation_utils import nodes_message_create, order_food_message_create
 
 
 class Adaptor:
@@ -12,8 +13,6 @@ class Adaptor:
       self.object_food_names_to_prof = {
          v: k for k, v in self.prof_food_names_to_object.items()
       }
-
-      self.prof_clients_received = []
 
    def foodStringToFoodObject(self, all_food):
       food_class_list = []
@@ -34,13 +33,9 @@ class Adaptor:
       return result
 
    def adapt(self, message_received, addr):
-      new_message = {
-         'method': None,
-         'args': {
-            'food': None,
-            'address': None
-         }
-      }
+      message_order_food = order_food_message_create(None, None)
+      new_message = nodes_message_create(None, message_order_food)
+
       if (message_received['method'] == 'ORDER' or message_received['method'] == 'PICKUP'
          or message_received['method'] == GIVE_FOOD):
          if message_received['method'] == 'ORDER':
@@ -48,16 +43,9 @@ class Adaptor:
             new_message['args']['food'] = self.foodStringToFoodObject(message_received['args'])
             new_message['args']['address'] = addr
 
-            self.prof_clients_received.append(addr)
          elif message_received['method'] == 'PICKUP':
             new_message['method'] = PICKUP
             new_message['args'] = message_received['args']
-         else:
-            if addr in self.prof_clients_received:
-               new_message['method'] = 'GIVE_FOOD'
-               new_message['args'] = self.foodObjectToFoodString(message_received['args'])
-            else:
-               new_message = message_received
       else:
          new_message = message_received
 

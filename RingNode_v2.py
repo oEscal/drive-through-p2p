@@ -108,7 +108,7 @@ class RingNode(threading.Thread):
    def sendToClient(self, addr, method, args):
       message_to_send = nodes_message_create(method, args)
 
-      self.send(addr, self.adaptor.adapt(message_to_send, addr))
+      self.send(addr, message_to_send)
 
    def run(self):
       self.socket.bind(self.addr)
@@ -173,14 +173,13 @@ class RingNode(threading.Thread):
             elif message_received['method'] == NODE_DISCOVERY:
                self.discoveryReply(message_received['args'])
             elif message_received['method'] == ORDER:
+               self.logger.debug("Message received from client: " + str(message_received_copy))
+
                message_received_copy = copy.deepcopy(message_received)
                message_received_copy['args']['food'] = print_out(message_received_copy['args']['food'])
-
-               self.logger.debug("Message received from client: " + str(message_received_copy))
                self.sendMessageToToken(self.entities['Waiter'], message_received['args'])
             elif message_received['method'] == PICKUP:
                self.logger.debug("Message received from client: " + str(message_received))
-
 
                message_to_send = entities_message_create(PICK, message_received['args'])
                self.sendMessageToToken(self.entities['Clerk'], message_to_send)

@@ -36,13 +36,12 @@ class Clerk(threading.Thread):
          if client_id in self.food_done:
             logger.debug("Given food %s to %s", print_out(self.food_done[client_id][1]), str(client_id))
 
-            self.node.sendToClient(self.food_done[client_id][0], GIVE_FOOD, self.food_done[client_id][1])
+            self.node.sendToClient(self.food_done[client_id][0], GIVE_FOOD, print_out(self.food_done[client_id][1]))
 
             self.food_done.pop(client_id)  # to remove the given food
             self.pickups.remove(client_id)  # remove client_id picked
 
-   def check_food_state(
-         self):  # tests whether the food remains hot using a timeout variable(defined above ->self.food_cold_timeout)
+   def check_food_state(self):  # tests whether the food remains hot using a timeout variable(defined above ->self.food_cold_timeout)
       food_done_copy = copy.deepcopy(self.food_done)
       for key in food_done_copy:
          if time.time() - self.food_done[key][-1] > self.food_cold_timeout:
@@ -64,7 +63,6 @@ class Clerk(threading.Thread):
             self.food_done[request['value']['ticket']] = (
                request['value']['client_address'], request['value']['food'], time.time()
             )
-
 
          elif request['type'] == PICKUP:  # add customers ready for payment in a list
             logger.debug("Pickup request %s", request['value'])

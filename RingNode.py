@@ -106,7 +106,7 @@ class RingNode(threading.Thread):
    def sendToClient(self, addr, method, args):
       message_to_send = nodes_message_create(method, args)
 
-      self.send(addr, self.adaptor.adapt(message_to_send, addr))
+      self.send(addr, message_to_send)
 
    def run(self):
       self.socket.bind(self.addr)

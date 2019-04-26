@@ -41,8 +41,19 @@ FRYER_STD = 0.5
 
 
 def print_out(input_str):
-   string_order = ""
-   for i in range(len(input_str) - 1):
-      string_order += str(input_str[i]) + ", "
-   string_order += str(input_str[len(input_str) - 1])
-   return string_order
+   from food import Hamburger, Chips, Drink
+
+   string_order = {
+      "hamburger": 0,
+      "fries": 0,
+      "drink": 0
+   }
+
+   for i in range(len(input_str)):
+      if input_str[i].__class__ == Hamburger:
+         string_order['hamburger'] = input_str[i].number
+      elif input_str[i].__class__ == Chips:
+         string_order['fries'] = input_str[i].number
+      elif input_str[i].__class__ == Drink:
+         string_order['drink'] = input_str[i].number
+   return str(string_order)

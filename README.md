@@ -1,8 +1,9 @@
 # Drive-Through Restaurant P2P
 
 
-## Como executar
-Abrir dois terminais:
+## Execução dos testes
+
+### Execução normal com os scripts fornecidos pelos docentes
 
 simulação:
 ```console
@@ -12,8 +13,48 @@ cliente:
 ```console
 $ python3 client.py
 ```
+### Script bash para executar cada entidade de forma aleatória com um espaçamento temporal
+
+```console
+$ ./simulation_init.py <Interval in seconds>
+```
+```console
+Usage:
+$ ./simulation_init.py 10
+```
+
+### Script bash para testar a versão 2 do ring node, selecionando aleatoriamente 1 processo para ser terminado, tendo um tempo de "sleep" entre cada termino de processo.
+
+```console
+$ ./simulation_v2_init.py <Number of iterations> <Time between process kills ( in seconds ) >
+```
+```console
+Usage:
+$ ./simulation_v2_init.py 5 2
+```
 
 
+### Script bash para executar vários clientes
+
+
+```console
+$ ./init.sh <number of clients>
+```
+```console
+Usage:
+$ ./init.sh 10
+```
+
+### Script bash para intercalar duas versões da classe RingNode em toda a simulação
+
+```console
+$ ./switch_to_v2.sh <import file to substitute> <import file to add>
+```
+
+```console
+Usage:
+$ ./switch_to_v2.sh RingNode_v2.py RingNode.py 
+```
 
 
 ## Authors
@@ -25,3 +66,4 @@ $ python3 client.py
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+

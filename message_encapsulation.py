@@ -18,6 +18,11 @@ discovery_message = {
    'id': None
 }
 
+order_food_message = {
+   'addr': None,
+   'food': None
+}
+
 entities_message = {
    'type': None,
    'value': None
