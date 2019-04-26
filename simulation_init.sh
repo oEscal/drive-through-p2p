@@ -1,5 +1,5 @@
 if [ "$#" -ne 1 ]; then
-    printf "usage:\n$./init.sh <interval in seconds>\n"
+    printf "usage:\n$./simulation_init.sh <interval in seconds>\n"
 
 else
 
@@ -9,7 +9,7 @@ else
     for i in "${nodes_s[@]}"
     do
         echo "$i"
-        gnome-terminal -x bash -c "echo $i; python3 $i; exec bash"
+        gnome-terminal -x bash -c "echo $i; python3 $i; exec bash" 2>&1 >/dev/null
         sleep $1
     done
 fi

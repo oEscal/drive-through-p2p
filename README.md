@@ -23,6 +23,17 @@ Usage:
 $ ./simulation_init.py 10
 ```
 
+### Script bash para testar a versão 2 do ring node, selecionando aleatoriamente 1 processo para ser terminado, tendo um tempo de "sleep" entre cada termino de processo.
+
+```console
+$ ./simulation_v2_init.py <Number of iterations> <Time between process kills ( in seconds ) >
+```
+```console
+Usage:
+$ ./simulation_v2_init.py 5 2
+```
+
+
 ### Script bash para executar vários clientes
 
 
