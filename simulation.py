@@ -15,17 +15,17 @@ logging.basicConfig(level=logging.DEBUG,
 def main():
 
     restaurant = Restaurant()
-    #waiter = Waiter()
+    waiter = Waiter()
     chef = Chef()
     clerk = Clerk()
 
     restaurant.start()
-    #waiter.start()
+    waiter.start()
     chef.start()
     clerk.start()
 
     restaurant.join()
-    #waiter.join()
+    waiter.join()
     chef.join()
     clerk.join()
 

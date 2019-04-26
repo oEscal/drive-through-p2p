@@ -11,7 +11,7 @@ from utils import NODE_JOIN, REQUEST_INFO, ENTITIES_NAMES, NODE_DISCOVERY, ORDER
    TOKEN, PICK, GIVE_FOOD, KEEP_ALIVE, IM_ALIVE, CLEAR_TABLE, print_out
 from adaptor import Adaptor
 from encapsulation_utils import nodes_message_create, token_message_create, \
-   pre_ring_message_create, discovery_message_create
+   pre_ring_message_create, discovery_message_create, entities_message_create
 
 
 class RingNode(threading.Thread):
@@ -161,10 +161,7 @@ class RingNode(threading.Thread):
                   self.logger.debug("Me: " + str(self.addr) + "\nSuccessor:" + str(self.successor_addr) + "\n")
 
             elif message_received['method'] == KEEP_ALIVE:
-               message_to_send = {
-                  'method': IM_ALIVE,
-                  'args': None
-               }
+               message_to_send = nodes_message_create(IM_ALIVE, None)
                self.send(addr, message_to_send)
             elif message_received['method'] == IM_ALIVE:
                time_since_last_alive = time.time()
@@ -184,10 +181,8 @@ class RingNode(threading.Thread):
             elif message_received['method'] == PICKUP:
                self.logger.debug("Message received from client: " + str(message_received))
 
-               message_to_send = {
-                  'type': PICK,
-                  'value': message_received['args']
-               }
+
+               message_to_send = entities_message_create(PICK, message_received['args'])
                self.sendMessageToToken(self.entities['Clerk'], message_to_send)
             elif message_received['method'] == TOKEN:
                id_destination = message_received['args']['id']
@@ -212,11 +207,7 @@ class RingNode(threading.Thread):
          if self.inside_ring and time.time() - im_alive_time > self.refresh_time:
             im_alive_time = time.time()
 
-            message_to_send = {
-               'method': KEEP_ALIVE,
-               'args': None
-            }
-
+            message_to_send = nodes_message_create(KEEP_ALIVE, None)
             self.send(self.successor_addr, message_to_send)
 
          if self.inside_ring and time.time() - time_since_last_alive > self.refresh_time*2:

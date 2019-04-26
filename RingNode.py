@@ -11,7 +11,7 @@ from utils import NODE_JOIN, REQUEST_INFO, ENTITIES_NAMES, NODE_DISCOVERY, ORDER
    TOKEN, PICK, GIVE_FOOD, print_out
 from adaptor import Adaptor
 from encapsulation_utils import nodes_message_create, token_message_create, \
-   pre_ring_message_create, discovery_message_create
+   pre_ring_message_create, discovery_message_create, entities_message_create
 
 
 class RingNode(threading.Thread):
@@ -167,10 +167,7 @@ class RingNode(threading.Thread):
             elif message_received['method'] == PICKUP:
                self.logger.debug("Message received from client: " + str(message_received))
 
-               message_to_send = {
-                  'type': PICK,
-                  'value': message_received['args']
-               }
+               message_to_send = entities_message_create(PICK, message_received['args'])
                self.sendMessageToToken(self.entities['Clerk'], message_to_send)
             elif message_received['method'] == TOKEN:
                id_destination = message_received['args']['id']

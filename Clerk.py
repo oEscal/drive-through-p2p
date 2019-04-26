@@ -4,7 +4,7 @@ import logging
 import threading
 import copy
 import time
-from RingNode_v2 import RingNode
+from RingNode import RingNode
 from utils import FOOD_DONE, PICKUP, GIVE_FOOD, print_out
 
 logging.basicConfig(level=logging.DEBUG,
@@ -38,8 +38,6 @@ class Clerk(threading.Thread):
 
             self.node.sendToClient(self.food_done[client_id][0], GIVE_FOOD, self.food_done[client_id][1])
 
-            print(self.food_done[client_id][1])
-            print(self.class_into_dict(self.food_done[client_id][1]))
             self.food_done.pop(client_id)  # to remove the given food
             self.pickups.remove(client_id)  # remove client_id picked
 

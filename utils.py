@@ -6,9 +6,10 @@ ORDER = 3
 PICKUP = 4
 TOKEN = 5
 TICKET = 6
-KEEP_ALIVE = 7
-IM_ALIVE = 8
-CLEAR_TABLE = 9
+GIVE_FOOD = 7
+KEEP_ALIVE = 8
+IM_ALIVE = 9
+CLEAR_TABLE = 10
 
 # request equipment
 REQUEST_GRILL = 0
@@ -21,8 +22,6 @@ ACKNOWLEDGE = 1
 RETURN_EQ = 2
 FOOD_DONE = 3
 PICK = 4
-GIVE_FOOD = 5
-
 
 # get by id
 ENTITIES_NAMES = [
@@ -41,10 +40,9 @@ FRYER_MEAN = 5
 FRYER_STD = 0.5
 
 
-def print_out(input):
-   print(input)
+def print_out(input_str):
    string_order = ""
-   for i in range(len(input)-1):
-      string_order += str(input[i]) + ", "
-   string_order += str(input[len(input)-1])
+   for i in range(len(input_str) - 1):
+      string_order += str(input_str[i]) + ", "
+   string_order += str(input_str[len(input_str) - 1])
    return string_order
