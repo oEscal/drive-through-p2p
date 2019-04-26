@@ -25,13 +25,8 @@ class Clerk(threading.Thread):
       self.food_done = {}
       self.pickups = []
 
-   def class_into_dict(self, food):
-      food_dict = {}
-      for i in food:
-         food_dict[i.name] = i.number
-      return food_dict
-
-   def set_order(self):  # forward the food order to its customer
+   # forward the food order to its customer
+   def set_order(self):
       for client_id in self.pickups:
          if client_id in self.food_done:
             logger.debug("Given food %s to %s", print_out(self.food_done[client_id][1]), str(client_id))
@@ -41,7 +36,9 @@ class Clerk(threading.Thread):
             self.food_done.pop(client_id)  # to remove the given food
             self.pickups.remove(client_id)  # remove client_id picked
 
-   def check_food_state(self):  # tests whether the food remains hot using a timeout variable(defined above ->self.food_cold_timeout)
+   # tests whether the food remains hot using a timeout variable
+   # (defined above ->self.food_cold_timeout)
+   def check_food_state(self):
       food_done_copy = copy.deepcopy(self.food_done)
       for key in food_done_copy:
          if time.time() - self.food_done[key][-1] > self.food_cold_timeout:

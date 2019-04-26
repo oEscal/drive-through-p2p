@@ -29,7 +29,8 @@ class Chef(threading.Thread):
       self.last_order = None
       self.order_to_client = {}
 
-   def choose_request(self, food): #return request value according to the food
+   # returns request value according to the food
+   def choose_request(self, food):
       if food.__class__ == Hamburger:
          return REQUEST_GRILL
       elif food.__class__ == Drink:
@@ -38,7 +39,8 @@ class Chef(threading.Thread):
          return REQUEST_FRYER
       return None
 
-   def requests(self, order): #chef do request to the restaurant to equipment usage
+   # chef do request to the restaurant to equipment usage
+   def requests(self, order):
       equipments_to_request = []
       for food in order:
          equipments_to_request.append(self.choose_request(food))
@@ -48,7 +50,8 @@ class Chef(threading.Thread):
          self.node.sendMessageToToken(self.node.entities['Restaurant'], equipments_to_request)
          logger.debug("Requesting %s", equipments_to_request)
 
-   def cook(self, equipment, food): #cooking function,after the necessary ack
+   # cooking function,after the necessary ack
+   def cook(self, equipment, food):
       equipment.cook(food.number)
       logger.debug("I cooked %s!\n", str(food))
 
@@ -58,7 +61,7 @@ class Chef(threading.Thread):
       self.node.start()
 
       while True:
-         #recieving ACK orders from restaurant or food requests from waiter to be cooked
+         # receiving ACK orders from restaurant or food requests from waiter to be cooked
          orders = self.node.in_queue.get()
 
          if orders['type'] == NEW_ORDER:
